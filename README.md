@@ -1,2 +1,2 @@
-# front_ladoga
-Landing page (nextjs)
+# front_ladoga - Магия севера
+SSR Landing page (nextjs)
