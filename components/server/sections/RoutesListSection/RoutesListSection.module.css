@@ -1,0 +1,39 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap:2rem;
+}
+.title{
+    font-family: var(--font-header);
+    color: white;
+    font-size: 2rem;
+    width: 100%;
+    text-align: center;
+    text-transform: uppercase;
+}
+.route_name {
+    color: black;
+    font-family: var(--font-header);
+    font-size: 1.4rem;
+    padding-bottom: 4rem;
+}
+.routes_list_content {
+    display: flex;
+    gap:4rem;
+    width: calc(100% - 2rem);
+margin: 0 1rem;
+overflow-x: auto;
+overflow-y: hidden;
+}
+.route_content {
+    outline: 1px solid yellow ;
+    width: 360px;
+    padding: 1rem 1.4rem;
+    height: 100%;
+}
+.route_container {
+    background-color: white;
+}
+.content{
+    font-size: 1.6rem;
+}

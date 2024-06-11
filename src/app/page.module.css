@@ -1,0 +1,12 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 100dvh;
+  background-color: #151311;
+}
+.main > * {
+    /* outline: 1px solid; */
+    width:100%;
+}

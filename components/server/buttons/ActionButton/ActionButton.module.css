@@ -1,0 +1,23 @@
+.action_btn {
+    border-radius: 8px;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    padding: 0.4rem .8rem;
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+    text-transform:capitalize;
+    transform-origin: center center;
+}
+.action_btn>span {
+    display: flex;
+    align-items: center;
+    gap:.8rem;
+    opacity: .8;
+}
+.action_btn:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+    color:white;
+}
+.action_btn:hover > span {
+    opacity: 1;
+    color:white;
+}
