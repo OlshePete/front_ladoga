@@ -1,12 +1,19 @@
 import { Response, RouteSectionData } from "../types/webSiteContentTypes";
 
-const { CMS_TOKEN="", CMS_URL="" } = process.env
+// const res = await fetch(`${API_URL}/api/intro?populate=*`, {
+//   headers: {
+//     authorization: ,
+//   },
+// });
+
+const { API_TOKEN, API_URL } = process.env
 const headers = {
   Authorization:
-    `Bearer ${CMS_TOKEN}`,
+    `bearer ${API_TOKEN}`,
 }
 export async function getRoutes() {
-    const response = await fetch('http://localhost:1337/api/routes?populate=*', {
+
+    const response = await fetch(`${API_URL}/api/routes?populate=*`, {
       next:{
         revalidate:60
       },

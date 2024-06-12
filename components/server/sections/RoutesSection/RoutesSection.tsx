@@ -4,10 +4,11 @@ import { ActionButton } from "../../buttons/ActionButton/ActionButton";
 import styles from "./RoutesSection.module.css";
 
 const RoutesSection =  ({routes}:{routes:Response<RouteSectionData[]>}) => {
+  const API_URL = process.env.API_URL
   routes.data.forEach(console.log)
 
     return (
-      <section className={styles.container}>
+      <section  className={`${styles.container} section`}>
         {
           routes && Array.isArray(routes.data) && routes.data.slice(0,2).map((route, routeIndex)=>{
             const {name, description, summary, images} = route.attributes
@@ -15,7 +16,7 @@ const RoutesSection =  ({routes}:{routes:Response<RouteSectionData[]>}) => {
               <div className={styles.route_container} key={'top-routes-'+route.id}>
                 <div className={styles.route_content}>
               {images.data[1] ?  <Image
-                  src={process.env.CMS_URL+ images.data[1].attributes.url}
+                  src={ API_URL +images.data[1].attributes.url}
                   alt={`Product gallery ${images.data[1].id}`}
                   className={`${styles.image}`}
                   width="300"
@@ -43,7 +44,7 @@ const RoutesSection =  ({routes}:{routes:Response<RouteSectionData[]>}) => {
 
                   <div className={styles.image_container}>
                 <Image
-                  src={process.env.CMS_URL+ images.data[0].attributes.url}
+                  src={ API_URL+ images.data[0].attributes.url}
                   alt={`Product gallery ${images.data[0].id}`}
                   className={`${styles.image}`}
                   style={{objectFit:"cover"}}

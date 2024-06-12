@@ -1,10 +1,18 @@
 import type { Metadata } from "next";
-import { Open_Sans,Dela_Gothic_One } from "next/font/google";
+import { Open_Sans, Dela_Gothic_One } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 
-const deltaGO = Dela_Gothic_One({ subsets: ["cyrillic"],weight:'400',variable:'--font-header'  });
-const openSans = Open_Sans({ subsets: ["cyrillic"],weight:['400','300','700'],variable:'--font-content'  });
+const deltaGO = Dela_Gothic_One({
+  subsets: ["cyrillic"],
+  weight: "400",
+  variable: "--font-header",
+});
+const openSans = Open_Sans({
+  subsets: ["cyrillic"],
+  weight: ["400", "300", "700"],
+  variable: "--font-content",
+});
 
 export const metadata: Metadata = {
   title: "Магия севера",
@@ -18,9 +26,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru">
-      <Providers>
-        <body className={`${deltaGO.variable} ${openSans.variable}`}>{children}</body>
-      </Providers>
+      <body className={`${deltaGO.variable} ${openSans.variable}`}>
+        {children}
+      </body>
     </html>
   );
 }

@@ -6,7 +6,7 @@ const ProjectSection = ({content}:{content:Response<AboutSectionData>}) => {
   const {title,sub_title, images} = content.data.attributes
   const text = content.data.attributes.content
     return (
-      <section className={styles.container}>
+      <section  className={`${styles.container} section`}>
         <div className={styles.content}>
         <div className={styles.content_title}>
         <h2 className={styles.title}>{title}</h2>

@@ -1,13 +1,17 @@
 import { AboutSectionData, Response, StartSectionData } from "../types/webSiteContentTypes";
-
-const { CMS_TOKEN="", CMS_URL="" } = process.env
+const { API_TOKEN, API_URL } = process.env
 const headers = {
   Authorization:
-    `Bearer ${CMS_TOKEN}`,
+    `bearer ${API_TOKEN}`,
 }
+
 const getContent = async () => {
-  const response = await fetch(`${CMS_URL}/api/naponenie-sajta?populate=*`, {
+  console.log(`test/api/naponenie-sajta?populate=*`)
+  const response = await fetch(`${API_URL}/api/naponenie-sajta?populate=*`, {
     headers,
+    next:{
+      revalidate:60
+    }
   });
 
   if (!response.ok)
@@ -16,10 +20,10 @@ const getContent = async () => {
   return response.json();
 };
 const getIntro = async () => {
-  const response = await fetch(`${CMS_URL}/api/intro?populate=*`, {
+  const response = await fetch(`${API_URL}/api/intro?populate=*`, {
     headers,
     next:{
-      revalidate:1
+      revalidate:60
     }
   });
 
@@ -31,8 +35,11 @@ const getIntro = async () => {
   return intro_content;
 };
 const getContacts = async () => {
-  const response = await fetch(`${CMS_URL}/api/contact`, {
+  const response = await fetch(`${API_URL}/api/contact?populate=*`, {
     headers,
+    next:{
+      revalidate:60
+    }
   });
 
   if (!response.ok)
@@ -43,8 +50,11 @@ const getContacts = async () => {
   return response.json();
 };
 const getAbout = async () => {
-  const response = await fetch(`${CMS_URL}/api/about?populate=images`, {
+  const response = await fetch(`${API_URL}/api/about?populate=*`, {
     headers,
+    next:{
+      revalidate:60
+    }
   });
 
   if (!response.ok)

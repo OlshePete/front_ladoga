@@ -11,34 +11,40 @@ import { getRoutes } from "../../services/getRoutes";
 import { getAbout, getContacts, getContent, getIntro } from "../../services/getWebSiteContent";
 import styles from "./page.module.css";
 
+const API_URL = process.env.CMS_URL;
+const API_TOKEN = process.env.CMS_TOKEN;
+
 export default async function Home() {
 const routes = await getRoutes()
 const content = await getContent()
 const intro_content = await getIntro()
 const about_content = await getAbout()
 const contacts_content = await getContacts()
-console.log(about_content)
+// console.log('process.env.CMS_URL home',process.env.CMS_URL)
+
+
   return (
-    <main className={styles.main}>
-     <TheHeader logo={intro_content.data.attributes.logo}/>
+    <main className={styles.main} >
+      {/* <header style={{color:'white'}}>{JSON.stringify(data)}</header> */}
+      <TheHeader logo={intro_content.data.attributes.logo}/>
      <StartSection content={intro_content}/>
-     <ProjectSection content={about_content}/>
+    <ProjectSection content={about_content}/>
      <RoutesSection routes={routes}/>
      <RoutesListSection routes={routes}/>
-     
-     <section>
-     <p>boats_summary</p>
+     {}
+     <section className="section">
+     <button className="btn btn-primary">boats_summary</button>
      <p>boats_gallery</p>
      <p>boats_sale_summary_list</p>
      </section>
-     <section>
+     <section className="section">
 
      <ClientOrderForm routes={routes}/>
 
      </section>
-     <section>
-
-     <p>{JSON.stringify(contacts_content)}</p>
+     <section className="section">
+test
+     {/* <p>{JSON.stringify(contacts_content)}</p> */}
      </section>
 
      <TheFooter/>

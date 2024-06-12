@@ -6,7 +6,7 @@ const RoutesListSection =  ({routes}:{routes:Response<RouteSectionData[]>}) => {
   routes.data.forEach(console.log)
 
     return (
-      <section className={styles.container}>
+      <section  className={`${styles.container} section`}>
       <h2 className={styles.title}>наши маршруты</h2>
                 <div className={styles.routes_list_content}>
         {
