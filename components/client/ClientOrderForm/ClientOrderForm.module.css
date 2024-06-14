@@ -1,3 +1,10 @@
-.cointainer {
-    
+.title {
+    font-family: var(--font-header);
+    font-size: 2rem;
+    color: white;
+}
+.route_title {
+    font-family: var(--font-header);
+    font-size: 1.4rem;
+    color: white;
 }
