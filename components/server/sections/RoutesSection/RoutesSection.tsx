@@ -15,13 +15,13 @@ const RoutesSection =  ({routes}:{routes:Response<RouteSectionData[]>}) => {
             return (
               <div className={styles.route_container} key={'top-routes-'+route.id}>
                 <div className={styles.route_content}>
-              {images.data[1] ?  <Image
+              {/* {images.data[1] ?  <Image
                   src={ API_URL +images.data[1].attributes.url}
                   alt={`Product gallery ${images.data[1].id}`}
                   className={`${styles.image}`}
                   width="300"
                   height="300"
-                />:<div style={{height:'300px'}}/>}
+                />:<div style={{height:'300px'}}/>} */}
                 <span>
 
                 <span className={styles.content}>{summary}</span><br/>
@@ -43,13 +43,14 @@ const RoutesSection =  ({routes}:{routes:Response<RouteSectionData[]>}) => {
                 >{name}</h2>
 
                   <div className={styles.image_container}>
-                <Image
+                {/* <Image
                   src={ API_URL+ images.data[0].attributes.url}
                   alt={`Product gallery ${images.data[0].id}`}
                   className={`${styles.image}`}
                   style={{objectFit:"cover"}}
                   fill={true}
-                /></div>
+                /> */}
+                </div>
                 </div>
               </div>
             )
