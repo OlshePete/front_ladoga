@@ -20,7 +20,6 @@ const AboutGallery = ({images, withLabels=true}:{withLabels?:boolean,images:{dat
             style={{
               objectFit:'cover',
               width:'100%',
-              position: 'relative',
               height: 'unset!important',
             }}
           />
