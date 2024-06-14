@@ -12,12 +12,15 @@ const StartSection = ({content}:{content:Response<StartSectionData>}) => {
         <h1 className={styles.title}>{title}</h1>
         {sub_title && <h2 className={styles.sub_title}>{sub_title}</h2>}
         </div>
+
         <Image
           src={API_URL + (background.data.attributes.url|| "")}
           alt={background.data.attributes.alternativeText || ""}
           className={styles.image}
           style={{
-            objectFit:'cover'
+            objectFit:'cover',
+            width:'100dvw',
+            height:'100dvh'
           }}
           quality={100}
         />
