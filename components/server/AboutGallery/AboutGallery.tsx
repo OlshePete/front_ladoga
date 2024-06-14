@@ -18,7 +18,10 @@ const AboutGallery = ({images, withLabels=true}:{withLabels?:boolean,images:{dat
             className={`${styles.image} ${withLabels?styles.labled:""}`}
             fill={true}
             style={{
-              objectFit:'cover'
+              objectFit:'cover',
+              width:'100%',
+              position: 'relative',
+              height: 'unset!important',
             }}
           />
           {withLabels && <span className={styles.image_caption}>

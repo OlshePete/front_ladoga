@@ -30,7 +30,10 @@
 
 }
 .image {
-  
+  object-fit: contain;
+  width: 100% !important;
+  position: relative !important;
+  height: unset !important;
   /* z-index: 1;
   position: fixed; */
 }
