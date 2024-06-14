@@ -17,12 +17,9 @@ const StartSection = ({content}:{content:Response<StartSectionData>}) => {
           src={API_URL + (background.data.attributes.url|| "")}
           alt={background.data.attributes.alternativeText || ""}
           className={styles.image}
-          width='1200'
-          height='600'
+          fill={true}
           style={{
             objectFit:'cover',
-            width:'100dvw',
-            height:'100dvh'
           }}
           quality={100}
         />
