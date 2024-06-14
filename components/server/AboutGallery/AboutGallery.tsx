@@ -19,7 +19,6 @@ const AboutGallery = ({images, withLabels=true}:{withLabels?:boolean,images:{dat
             fill={true}
             style={{
               objectFit:'cover',
-              width:'100%',
               height: 'unset!important',
             }}
           />
