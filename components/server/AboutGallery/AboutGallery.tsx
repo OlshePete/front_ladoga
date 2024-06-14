@@ -17,7 +17,9 @@ const AboutGallery = ({images, withLabels=true}:{withLabels?:boolean,images:{dat
             alt={`Product gallery ${image.id}`}
             className={`${styles.image} ${withLabels?styles.labled:""}`}
             fill={true}
-            objectFit={'cover'}
+            style={{
+              objectFit:'cover'
+            }}
           />
           {withLabels && <span className={styles.image_caption}>
               {image.attributes.alternativeText}
