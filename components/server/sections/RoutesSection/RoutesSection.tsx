@@ -8,12 +8,12 @@ const RoutesSection =  ({routes}:{routes:Response<RouteSectionData[]>}) => {
   routes.data.forEach(console.log)
 
     return (
-      <section  className={`${styles.container} section`}>
+      <section  className={`${styles.container} section`} id={'top-routes'}>
         {
           routes && Array.isArray(routes.data) && routes.data.slice(0,2).map((route, routeIndex)=>{
             const {name, description, summary, images} = route.attributes
             return (
-              <div className={styles.route_container} key={'top-routes-'+route.id}>
+              <div className={styles.route_container} key={'top-routes-'+route.id} id={'top-routes-'+route.id}>
                 <div className={styles.route_content}>
               {images.data[1] ?  <Image
                   src={ API_URL +images.data[1].attributes.formats.small.url}
