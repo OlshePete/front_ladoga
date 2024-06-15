@@ -1,8 +1,8 @@
 'use client'
 import React, { FC, useState } from 'react';
-import { IconType } from 'react-icons';
+import { BiMenuAltLeft } from "react-icons/bi";
 
-const OverlayMenu:FC<{Icon:IconType}> = ({Icon}) => {
+const OverlayMenu:FC<{}> = ({}) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleOpenMenu = () => {
@@ -30,13 +30,7 @@ const OverlayMenu:FC<{Icon:IconType}> = ({Icon}) => {
       <h1 className="text-4xl font-light">Welcome to KindaCode.com</h1>
       <h2 className="text-xl">Full-screen overlay navigation menu example</h2>
       <p>
-          {
-              Icon ? <Icon  onClick={handleOpenMenu}/> : <a href="#" className="px-5 py-3 bg-blue-500 hover:bg-blue-600 text-xl text-white duration-300" onClick={handleOpenMenu}>
-          <span className="text-2xl">&#9776;</span>
-          Menu
-        </a>
-          }
-       
+         <BiMenuAltLeft  onClick={handleOpenMenu}/> 
       </p>
     </div>
    </>
