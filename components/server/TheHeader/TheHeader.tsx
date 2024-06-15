@@ -13,7 +13,7 @@ const TheHeader = ({ logo }: { logo: { data: TImage } }) => {
         <BiMenuAltLeft />
         <div className={styles.logo}>
           <Image
-            src={API_URL + (logo.data.attributes.url || "")}
+            src={API_URL + (logo.data.attributes.formats.small.url || "")}
             alt={logo.data.attributes.alternativeText || ""}
             className={styles.image}
             width="120"

@@ -13,7 +13,7 @@ const AboutGallery = ({images, withLabels=true}:{withLabels?:boolean,images:{dat
         className={styles.imageContainer}
        >
           <Image
-            src={API_URL+ image.attributes.url}
+            src={API_URL+ image.attributes.formats.small.url}
             alt={`Product gallery ${image.id}`}
             className={`${styles.image} ${withLabels?styles.labled:""}`}
             fill={true}
