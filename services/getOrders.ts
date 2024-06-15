@@ -1,10 +1,16 @@
+import { AboutSectionData, Response, RouteSectionData } from "../types/webSiteContentTypes";
+import { wrapRequest } from "./utils";
+
 const { API_TOKEN, API_URL } = process.env
 const headers = {
   Authorization:
     `bearer ${API_TOKEN}`,
 }
-
-export const getAllorders = async () => {
+interface IOrderResponse extends Response<{
+  id:number;
+  attributes:Object;
+}[]> {}
+ const getAllorders = async () => {
     const response = await fetch(`${API_URL}/orders`, {
         headers,
         next:{
@@ -13,11 +19,14 @@ export const getAllorders = async () => {
     });
   
     if (!response.ok) throw new Error("Ошибка при загрузке списка заказов.");
-  
-    return response.json();
+    
+    const data:IOrderResponse = await response.json()
+    console.log("Получено ${} заказов");
+    
+    return data;
   };
   
-  export const getordersBySearch = async (search: string) => {
+   const getOrdersBySearch = async (search: string) => {
     const response = await fetch(
       `${API_URL}/orders?q=${search}`
       , {
@@ -28,6 +37,10 @@ export const getAllorders = async () => {
     });
   
     if (!response.ok) throw new Error("Ошибка при загрузке списка заказов.");
-  
-    return response.json();
+
+    const data:IOrderResponse = await response.json()
+    console.log("Найдено ${} заказов");
+    return data;
   };
+export const wrapperdGetAllOrders = wrapRequest(getAllorders);
+export const wrapperdGetordersBySearch = wrapRequest(getOrdersBySearch);

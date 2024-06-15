@@ -1,25 +1,22 @@
 import { Response, RouteSectionData } from "../types/webSiteContentTypes";
+import { wrapRequest } from "./utils";
 
-// const res = await fetch(`${API_URL}/api/intro?populate=*`, {
-//   headers: {
-//     authorization: ,
-//   },
-// });
-
-const { API_TOKEN, API_URL } = process.env
+const { API_TOKEN, API_URL } = process.env;
 const headers = {
-  Authorization:
-    `bearer ${API_TOKEN}`,
-}
-export async function getRoutes() {
+  Authorization: `bearer ${API_TOKEN}`,
+};
+async function getRoutes() {
+  const response = await fetch(`${API_URL}/api/routes?populate=*`, {
+    next: {
+      revalidate: 60,
+    },
+    headers,
+  });
 
-    const response = await fetch(`${API_URL}/api/routes?populate=*`, {
-      next:{
-        revalidate:60
-      },
-      headers
-    })
-    
-  const intro_content:Response<RouteSectionData[]> = await response.json()
-  return intro_content;
-  }
+  const routes: Response<RouteSectionData[]> = await response.json();
+  console.log(`Получено маршрутов, ${routes.data.length}`);
+
+  return routes;
+}
+
+export const wrappedGetRoutes = wrapRequest(getRoutes);

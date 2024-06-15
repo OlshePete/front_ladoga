@@ -1,4 +1,5 @@
 import { AboutSectionData, Response, StartSectionData } from "../types/webSiteContentTypes";
+import { wrapRequest } from "./utils";
 const { API_TOKEN, API_URL } = process.env
 const headers = {
   Authorization:
@@ -6,7 +7,6 @@ const headers = {
 }
 
 const getContent = async () => {
-  console.log(`test/api/naponenie-sajta?populate=*`)
   const response = await fetch(`${API_URL}/api/naponenie-sajta?populate=*`, {
     headers,
     next:{
@@ -65,4 +65,7 @@ const getAbout = async () => {
     const intro_content:Response<AboutSectionData> = await response.json()
     return intro_content;
 };
-export { getContent, getAbout, getContacts, getIntro };
+  export const wrappedGetContent = wrapRequest(getContent) 
+  export const wrappedGetAbout = wrapRequest(getAbout) 
+  export const wrappedGetContacts = wrapRequest(getContacts) 
+  export const wrappedGetIntro = wrapRequest(getIntro) 
