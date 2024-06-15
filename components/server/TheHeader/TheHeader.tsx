@@ -8,24 +8,26 @@ import { ClientHeaderWrapper } from "../../client/header/ClientHeaderWrapper";
 const TheHeader = ({ logo }: { logo: { data: TImage } }) => {
   const API_URL = process.env.API_URL;
   return (
-    <ClientHeaderWrapper>
-      <header className={styles.container}>
-        <div className={styles.content}>
-          <OverlayMenu />
-          <div className={styles.logo}>
-            <Image
-              src={API_URL + (logo.data.attributes.formats.small.url || "")}
-              alt={logo.data.attributes.alternativeText || ""}
-              className={styles.image}
-              width="120"
-              height="80"
-            />
+    <header className={styles.container}>
+      <ClientHeaderWrapper>
+        <>
+          <div className={styles.content}>
+            <OverlayMenu />
+            <div className={styles.logo}>
+              <Image
+                src={API_URL + (logo.data.attributes.formats.small.url || "")}
+                alt={logo.data.attributes.alternativeText || ""}
+                className={styles.image}
+                width="120"
+                height="80"
+              />
+            </div>
+            <ActionButton />
           </div>
-          <ActionButton />
-        </div>
-        <div className={styles.separator} id={"header_separator"}></div>
-      </header>
-    </ClientHeaderWrapper>
+          <div className={styles.separator} id={"header_separator"}></div>
+        </>
+      </ClientHeaderWrapper>
+    </header>
   );
 };
 
