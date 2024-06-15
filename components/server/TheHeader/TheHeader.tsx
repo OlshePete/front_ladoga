@@ -4,13 +4,14 @@ import { BiMenuAltLeft } from "react-icons/bi";
 import { Image as TImage } from "../../../types/webSiteContentTypes";
 import Image from "next/image";
 import { ActionButton } from "../buttons/ActionButton/ActionButton";
+import { OverlayMenu } from "./OverlayMenu";
 
 const TheHeader = ({ logo }: { logo: { data: TImage } }) => {
   const API_URL = process.env.API_URL;
   return (
     <header className={styles.container}>
       <div className={styles.content}>
-        <BiMenuAltLeft />
+        <OverlayMenu Icon={BiMenuAltLeft}/>
         <div className={styles.logo}>
           <Image
             src={API_URL + (logo.data.attributes.formats.small.url || "")}
