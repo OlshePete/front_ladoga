@@ -1,4 +1,3 @@
-import Image from "next/image";
 import ClientOrderForm from "../../components/client/ClientOrderForm/ClientOrderForm";
 import OrderForm from "../../components/server/OrderForm/OrderForm";
 import { ProjectSection } from "../../components/server/sections/ProjectSection/ProjectSection";
