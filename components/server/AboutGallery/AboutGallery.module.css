@@ -1,23 +1,23 @@
 .container {
     width: calc(100dvw - 4rem);
     display: flex;
-    gap:1rem;
-    overflow-x: scroll;
+    gap:4rem;
+    /* overflow-x: hidden; */
     padding: 4rem 1rem;
-    margin: 0 2rem;
+    margin: 10vh 0;
     color:white;
 }
 .image {
     border-radius: 16px;
 }
 .imageContainer {
-    min-width: 250px;
-    height: 250px;
+    min-width: 400px;
+    height: 400px;
     position: relative;
 }
 .imageContainer.labled {
-    width: 250px;
-    height: 290px;
+    width: 400px;
+    height: 460px;
 }
 .image_caption {
     font-family: var(--font-header);

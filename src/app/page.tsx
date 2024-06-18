@@ -1,5 +1,6 @@
 import ClientOrderForm from "../../components/client/ClientOrderForm/ClientOrderForm";
-import OrderForm from "../../components/server/OrderForm/OrderForm";
+import { OrderForm } from "../../components/client/ClientOrderForm/OrderForm";
+import { ScrollWrapper } from "../../components/client/motion/ScrollWrapper";
 import { ProjectSection } from "../../components/server/sections/ProjectSection/ProjectSection";
 import { RoutesListSection } from "../../components/server/sections/RoutesListSection/RoutesListSection";
 import { RoutesSection } from "../../components/server/sections/RoutesSection/RoutesSection";
@@ -20,10 +21,12 @@ const intro_content = await wrappedGetIntro()
 const about_content = await wrappedGetAbout()
 const contacts_content = await wrappedGetContacts()
 // console.log('process.env.CMS_URL home',process.env.CMS_URL)
+console.log(routes);
 
 
   return (
     <main className={styles.main} >
+
       {/* <header style={{color:'white'}}>{JSON.stringify(data)}</header> */}
       {intro_content?.data.attributes.logo && <TheHeader logo={intro_content.data.attributes.logo}/>}
      {intro_content && <StartSection content={intro_content}/>}
@@ -31,19 +34,19 @@ const contacts_content = await wrappedGetContacts()
      {routes && <RoutesSection routes={routes}/>}
      {routes && <RoutesListSection routes={routes}/>}
      {}
-     <section className="section">
-     <button className="btn btn-primary">boats_summary</button>
-     <p>boats_gallery</p>
-     <p>boats_sale_summary_list</p>
-     </section>
-     <section className="section">
+     {/* <section className="section">
+     <button className="btn btn-primary text-white">boats_summary</button>
+     <p className="text-white">boats_gallery</p>
+     <p className="text-white">boats_sale_summary_list</p>
+     </section> */}
+     <section className="section" id="new-order">
 
-     {routes && <ClientOrderForm routes={routes}/>}
+     {/* {routes && <ClientOrderForm routes={routes}/>} */}
+     {routes && <OrderForm routes={routes}/>}
 
      </section>
-     <section className="section">
-test
-     {/* <p>{JSON.stringify(contacts_content)}</p> */}
+     <section className="section" id="contacts">
+     <p>{JSON.stringify(contacts_content)}</p>
      </section>
 
      <TheFooter/>

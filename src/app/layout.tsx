@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Open_Sans, Dela_Gothic_One } from "next/font/google";
 import "./globals.css";
-import { Providers } from "./providers";
 
 const deltaGO = Dela_Gothic_One({
   subsets: ["cyrillic"],

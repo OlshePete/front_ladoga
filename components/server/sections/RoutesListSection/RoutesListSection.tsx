@@ -3,7 +3,7 @@ import { Response, RouteSectionData } from "../../../../types/webSiteContentType
 import styles from "./RoutesListSection.module.css";
 
 const RoutesListSection =  ({routes}:{routes:Response<RouteSectionData[]>}) => {
-  routes.data.forEach(console.log)
+console.log(routes);
 
     return (
       <section  className={`${styles.container} section`}>

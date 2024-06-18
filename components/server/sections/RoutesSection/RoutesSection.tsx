@@ -1,12 +1,13 @@
 import Image from "next/image";
 import { Response, RouteSectionData } from "../../../../types/webSiteContentTypes";
+import { TextWrapper } from "../../../client/motion/TextWrapper";
 import { ActionButton } from "../../buttons/ActionButton/ActionButton";
 import styles from "./RoutesSection.module.css";
 
 const RoutesSection =  ({routes}:{routes:Response<RouteSectionData[]>}) => {
   const API_URL = process.env.API_URL
-  routes.data.forEach(console.log)
-
+  // routes.data.forEach(console.log)
+// console.log(routes)
     return (
       <section  className={`${styles.container} section`} id={'top-routes'}>
         {
@@ -22,12 +23,16 @@ const RoutesSection =  ({routes}:{routes:Response<RouteSectionData[]>}) => {
                   width="300"
                   height="300"
                 />:<div style={{height:'300px'}}/>}
-                <span>
+<TextWrapper>
 
-                <span className={styles.content}>{summary}</span><br/>
-                <span className={styles.content}>{description}</span>
+                <div className={styles.content}>{summary}</div>
+</TextWrapper>
+                <br/>
+  <TextWrapper opposite>
 
-                </span>
+                <p className={styles.content}>{description}</p>
+  </TextWrapper>
+
                 {/* <ActionButton/> */}
                 </div>
                 <div className={styles.route_image} style={{

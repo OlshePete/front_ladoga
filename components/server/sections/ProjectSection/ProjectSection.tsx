@@ -1,4 +1,5 @@
 import { AboutSectionData, Response } from "../../../../types/webSiteContentTypes";
+import { TextWrapper } from "../../../client/motion/TextWrapper";
 import { AboutGallery } from "../../AboutGallery/AboutGallery";
 import styles from "./ProjectSection.module.css";
 
@@ -15,7 +16,14 @@ const ProjectSection = ({content}:{content:Response<AboutSectionData>}) => {
         }
         </div>
         <div className={styles.content_text}>
+          <TextWrapper>
+
         <p className={styles.text}>{text}</p>
+          </TextWrapper>
+          <TextWrapper opposite>
+
+<p className={styles.text}>{text}</p>
+  </TextWrapper>
         </div>
         </div>
         <AboutGallery images={images}/>

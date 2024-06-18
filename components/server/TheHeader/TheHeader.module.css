@@ -3,27 +3,26 @@
     width: 100vw;
     top:0;
     z-index: 12;
-    height: 120px;
+    height: 110px;
     background-color: transparent;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+    /* overflow: hidden; */
 }
 .content {
     width: 100%;
     padding: 0 10vw;
-    /* background-color: red; */
-    flex-grow: 1;
+    margin: auto 0;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    color:white
+    color:white;
 }
-.content>svg {
-    transform: scale(2);
-    cursor: pointer;
+.btn_container {
+    flex-grow: 1;
 }
 .logo {
     position: absolute;
@@ -32,11 +31,4 @@
     height: 80px;
     display: flex;
     justify-content: center;
-}
-
-.separator {
-    opacity: .4;
-    min-width: 1200px;
-    max-width: 80vw;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.8);
 }
