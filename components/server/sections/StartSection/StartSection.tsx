@@ -26,6 +26,7 @@ const StartSection = ({ content }: { content: Response<StartSectionData> }) => {
         className={styles.image}
         fill={true}
         sizes="100vw"
+        placeholder="blur"
         priority
         // style={{
         //   objectFit: "cover",
