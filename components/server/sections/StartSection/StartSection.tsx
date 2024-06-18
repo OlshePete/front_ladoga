@@ -27,6 +27,7 @@ const StartSection = ({ content }: { content: Response<StartSectionData> }) => {
         fill={true}
         sizes="100vw"
         placeholder="blur"
+        blurDateURL={background.data.attributes.formats.small.url}
         priority
         // style={{
         //   objectFit: "cover",
