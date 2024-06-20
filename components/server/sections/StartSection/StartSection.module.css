@@ -34,6 +34,7 @@
   width: 100% !important;
   position: absolute;
   height: unset !important;
+  object-position: center top;
   /* z-index: 1;
   position: fixed; */
 }

@@ -26,6 +26,9 @@ const StartSection = ({ content }: { content: Response<StartSectionData> }) => {
         className={styles.image}
         fill={true}
         sizes="100vw"
+        placeholder="blur"
+        blurDataURL={background.data.attributes.formats.small.url}
+        priority
         // style={{
         //   objectFit: "cover",
         // }}
