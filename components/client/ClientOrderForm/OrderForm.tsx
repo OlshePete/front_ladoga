@@ -25,6 +25,10 @@ interface IFromData {
   route: RouteData;
 }
 
+interface ICountry extends Object {
+  countryCode:string,
+  format:string,
+}
 const OrderForm: FC<Props> = ({ routes }) => {
   return (
     <div className={`bg-gray-300 w-dvw py-80 ${styles.container}`}>
@@ -116,7 +120,8 @@ const OrderForm: FC<Props> = ({ routes }) => {
                   ) {
                     return false; // or some other default value
                   }
-                  const { countryCode, format } = country;
+                  const {countryCode, format} = country as ICountry
+
                   if (value.length === 0 || value === countryCode) return true;
                   if (
                     country &&
