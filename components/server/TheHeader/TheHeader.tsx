@@ -13,9 +13,9 @@ const TheHeader = ({ logo }: { logo: { data: TImage } }) => {
     <header className={styles.container}>
         <>
           <div className={styles.content}>
-            <div className={styles.btn_container}>
+            {/* <div className={styles.btn_container}>
             <ActionButton />
-            </div>
+            </div> */}
             <div className={styles.logo}>
             <ScrollWrapperHeaderSeparator>
               <Image

@@ -1,8 +1,9 @@
 .container {
     display: flex;
     flex-direction: column;
-    gap:2rem;
+    gap:10rem;
     padding: 4rem 0 10rem 0;
+   max-width: 100dvw;
 }
 .title{
     font-family: var(--font-header);
@@ -22,12 +23,12 @@
     display: flex;
     gap:4rem;
     width: calc(100% - 2rem);
-margin: 0 1rem;
+/* margin: 0 1rem; */
 overflow-x: auto;
 overflow-y: hidden;
 }
 .route_content {
-    outline: 1px solid yellow ;
+    outline: 1px solid ;
     width: 360px;
     padding: 1rem 1.4rem;
     height: 100%;

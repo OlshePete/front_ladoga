@@ -11,5 +11,10 @@
 .container {
     font-family: var(--font-content);
     font-size: 1.4rem;
-
+    border-radius: 8px;
+    background-color: whitesmoke;
 }
+/* .container > * > * > * > *,
+.container > * > * > *  {
+    outline:1px solid
+} */

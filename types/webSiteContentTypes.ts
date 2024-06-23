@@ -102,11 +102,22 @@ export type ImageFormat = {
         createdAt: string;
         updatedAt: string;
         publishedAt: string;
+        departures:Response<RouteDepartureData[]>;
         images:{
             data:Image[]
         }
     }
   }
+  export type RouteDepartureData = {
+    id:number; 
+    attributes:{
+      createdAt: string;
+      updatedAt: string;
+      publishedAt: string;
+      time:string;
+    }
+  }
+
   export type Response<T> = {
     data: T;
     meta: any;

@@ -45,7 +45,7 @@ const ClientOrderForm: FC<{ routes: Response<RouteSectionData[]> }> = ({
     },
   };
   return (
-    <div className="container bg-white-600 w-dvw h-screen grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:mt-40">
+    <div className="container bg-white-600 w-dvw h-screen grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:mt-40 ">
 
     <Formik
       initialValues={initialValues}

@@ -1,6 +1,7 @@
 import ClientOrderForm from "../../components/client/ClientOrderForm/ClientOrderForm";
 import { OrderForm } from "../../components/client/ClientOrderForm/OrderForm";
 import { ScrollWrapper } from "../../components/client/motion/ScrollWrapper";
+import { OrderSection } from "../../components/server/sections/OrderSection/OrderSection";
 import { ProjectSection } from "../../components/server/sections/ProjectSection/ProjectSection";
 import { RoutesListSection } from "../../components/server/sections/RoutesListSection/RoutesListSection";
 import { RoutesSection } from "../../components/server/sections/RoutesSection/RoutesSection";
@@ -39,10 +40,10 @@ console.log(routes);
      <p className="text-white">boats_gallery</p>
      <p className="text-white">boats_sale_summary_list</p>
      </section> */}
-     <section className="section" id="new-order">
+     <section className="section">
 
      {/* {routes && <ClientOrderForm routes={routes}/>} */}
-     {routes && <OrderForm routes={routes}/>}
+     {routes && <OrderSection routes={routes}/>}
 
      </section>
      <section className="section" id="contacts">
