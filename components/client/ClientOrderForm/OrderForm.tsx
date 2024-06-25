@@ -8,6 +8,8 @@ import { Response, RouteSectionData } from "../../../types/webSiteContentTypes";
 import { LiaAtSolid } from "react-icons/lia";
 import OrderStepper from "./OrderStepper";
 import { formatDate } from "../../utils/formatDate";
+import Stepper from "./Stepper";
+import { formatDateToRender } from "../../utils/formatDateToRender";
 interface Props {
   routes: Response<RouteSectionData[]>
 }
@@ -36,63 +38,33 @@ const OrderForm: FC<Props> = ({ routes }) => {
   const [firstStep, setFirstStep] = useState(true)
   const nowDate = formatDate(new Date())
   console.log(nowDate);
+  const steps = ["Маршрут", "Отправление", "Контакты", "Подтверждение"];
+  const [currentStep, setCurrentStep] = useState(1);
+  const [complete, setComplete] = useState(false);
+
+const renderStep = (activeIndex:number, values:IFromData, setFieldValue: (field: string, value: any, shouldValidate?: boolean | undefined) => any) => {
   
-  return (
-    <div className={`bg-transparent ${styles.container} drop-shadow-[0_15px_15px_rgba(255,255,255,0.25)] hover:drop-shadow-[0_25px_25px_rgba(255,255,255,0.25)] ease-in-out pt-4 w-[1200px] h-[100%]`}>
-      <h1 className={`${styles.title} pl-10`}>Забронировать поездку</h1>
-      <OrderStepper active={firstStep ? 1 : 2} handler={() => setFirstStep(p => !p)} />
+  const currentRoute = routes.data.find(r => r.id === +values.route.route_id)
 
-      <Formik
-        initialValues={{
-          user: {
-            name: "",
-            email: "",
-            phone: "",
-            comment:"",
-          },
-          route: {
-            route_id: 1,
-            departure_id: 0,
-            date: nowDate,
-            count: 0,
-          }
-        }}
-        onSubmit={(
-          values: IFromData,
-          { setSubmitting }: FormikHelpers<IFromData>
-        ) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 500);
-        }}
-      >
-        {(props) => {
-          const { values, setFieldValue } = props
-          const isDeparturesDisabled = values.route.route_id === 0
-          const currentRoute = routes.data.find(r => r.id === +values.route.route_id)
-          console.log("7777", currentRoute?.attributes.departures.data);
-
-          return (
-            <Form className=" flex flex-col gap-2 pt-6 sm:px-2 lg:px-10 h-[fit-content]">
-              {
-                firstStep && <div className="flex flex-row gap-2 px-0    items-center ">
-                  <div className="flex-grow gap-2 flex flex-col ">
+  switch (activeIndex) {
+    case 1:
+      return (<div key={`form-order-${activeIndex}-${steps[activeIndex-1]}`} className="flex-grow gap-2 flex flex-col w-[100%] justify-center">
                     {
                       routes && routes?.data && routes?.data.map((route) => {
                         const hiddenClass = values.route.route_id === route.id ? '' : 'opacity-0'
                         return (
                           <div className="form-control cursor-pointer" key={route.attributes.name + "-" + route.id}>
                             <label className="cursor-pointer label justify-start gap-4 w-[fit-content] flex-row-reverse">
-                              <span className={`${styles.route_title} label-text`}>{route.attributes.name.trim()}</span>
+                              <span className={`${styles.route_title} label-text  text-nowrap `}>{route.attributes.name.trim()}</span>
                               <input type="checkbox" checked={values.route.route_id === route.id} className={`checkbox checkbox-success ${hiddenClass}`} onChange={() => setFieldValue('route.route_id', +route.id)} />
                             </label>
                           </div>)
                       })
                     }
-                  </div>
-
-                  <div className="flex flex-col gap-4 items-end gap-2   sm:py-2 lg:py-10  ">
+      </div>)
+    case 2:
+      return (<div key={`form-order-${activeIndex}-${steps[activeIndex-1]}`}>
+        <div className="flex flex-col gap-4 items-end gap-2   sm:py-2 lg:py-10  ">
                     <div className="w-[220px] flex flex-col items-end">
                       <label htmlFor="route.date" className="text-xs pb-2  ">Дата</label>
                       <Field as={'input'} id="route.date" name="route.date" type="date" min={nowDate}
@@ -103,7 +75,7 @@ const OrderForm: FC<Props> = ({ routes }) => {
                     <div className="w-[220px]  flex flex-col items-end">
                       <label htmlFor="route.departure" className="text-xs pb-2" >Время отправления</label>
                       <Field as="select" id="route.departure" name="route.departure_id" className="h-12  w-full  rounded-sm px-4 outline outline-neutral-700"
-                        disabled={isDeparturesDisabled}
+                        disabled={values.route.route_id === 0}
                       >
                         {
                           currentRoute && Array.isArray(currentRoute.attributes.departures.data) && currentRoute.attributes.departures.data.map((depart) => {
@@ -119,35 +91,37 @@ const OrderForm: FC<Props> = ({ routes }) => {
                         />
                     </div>
                   </div>
-                </div>
-              }
-              {
-                !firstStep && <div className="flex flex-row gap-10  pt-10">
-                  <div className="flex flex-col gap-2 w-[300px] ">
-                  <label htmlFor="user.name" className="text-xs pb-2">Ваше имя</label>
-                  <Field type="text" id="user.name" name="user.name" placeholder="Иван" className="h-12 mb-[32px] border rounded-sm px-4 outline outline-neutral-700" />
+      </div>)
+    case 3:
+      return (<div key={`form-order-${activeIndex}-${steps[activeIndex-1]}`}  className="flex flex-row gap-10  ">
+                  <div className="flex flex-col gap-2 w-[300px] justify-center">
+                  <label htmlFor="user.name" className="text-xs ">Ваше имя</label>
+                  <Field type="text" id="user.name" name="user.name" placeholder="Иван" className="h-12  border border-black rounded-md px-4 " />
                   
-                  <label htmlFor="user.phone" className="text-xs pb-2">Телефон</label>
+                  <label htmlFor="user.phone" className="text-xs ">Телефон</label>
 
                   <PhoneInput
                     inputStyle={{
+                      zIndex:2,
                       height: '3rem',
                       fontSize: '1.4rem',
-                      border: '1px solid transparent',
-                      borderRadius: '0.125rem',
+                      background:'transparent',
+                      // borderRadius: '0.125rem',
                       outline: '1px solid #404040',
                     }}
                     buttonStyle={{
+                      zIndex:1,
                       border: '1px solid transparent',
-                      borderRadius: '0.125 0 0 0.125',
+                      borderRadius: '0.25 0 0 0.25',
                       height: '3rem',
                       fontSize: '1.4rem',
                     }}
-                    inputClass="rounded-sm px-4 outline outline-neutral-700"
+                    buttonClass="rounded-md border border-black"
+                    inputClass="rounded-md px-4 border border-black"
                     specialLabel="Номер телефона"
                     country={"ru"}
-                    value={props.values.user.phone}
-                    onChange={(phone) => props.setFieldValue("user.phone", phone)}
+                    value={values.user.phone}
+                    onChange={(phone) => setFieldValue("user.phone", phone)}
                     isValid={(value, country: object, ...other) => {
                       if (
                         !country ||
@@ -181,26 +155,84 @@ const OrderForm: FC<Props> = ({ routes }) => {
                     }}
                   />
 
-                  <label htmlFor="user.email" className="text-xs pb-2">Почта (необязательно)</label>
+                  <label htmlFor="user.email" className="text-xs ">Почта (необязательно)</label>
                   <Field
                     id="user.email"
                     name="user.email"
                     placeholder="name@mail.ru"
                     type="user.email"
-                    className="h-12  px-4"
+                    className="h-12  px-4 rounded-md border border-black" 
                   />
                   </div>
-                  <div className="flex flex-col gap-2 w-[auto] flex-grow">
-                  <label htmlFor="user.comment" className="text-xs pb-2" >Комментарий (необязательно)</label>
-                      <Field as="textarea" type='text' id="user.comment" name="user.comment"  rows="5" className="h-64  w-full rounded-sm px-4 outline outline-neutral-700"
-                        />
+                  <div className="flex flex-col gap-2 w-[300px] flex-grow  justify-center">
+                  <label htmlFor="user.comment" className="text-xs " >Комментарий (необязательно)</label>
+                  <Field as="textarea" type='text' id="user.comment" name="user.comment"  rows="5" className="h-64  w-full rounded-sm px-4 py-2 outline outline-neutral-700"
+                    />
                   </div>
                  
-                </div>
-              }
-              <div className="flex flex-row justify-between w-[100%] h-[fit-content] pb-10">
+      </div>)
+    case 4:
+      const {name} = routes.data.find(r=>r.id ===values.route.route_id)?.attributes ?? {}
+      return (<div key={`form-order-${activeIndex}-${steps[activeIndex-1]}`} className='flex flex-col'>
+        <h3 className="text-nowrap">{name}</h3>
+        <span className="text-nowrap">{formatDateToRender(new Date(values.route.date))} - {currentRoute?.attributes.departures.data[values.route.departure_id]?.attributes.time}</span>
+        <span className="text-nowrap">мест забронировано - {values.route.count}</span>
+        <span className="text-nowrap">сумма заказа - {(currentRoute?.attributes.price ?? 1) * values.route.count}</span>
+      </div>)
+  
+    default:
+      return <>default</>
+  } 
+}
 
-                <div onClick={() =>{
+  return (
+    <div className={`bg-transparent ${styles.container} drop-shadow-[0_15px_15px_rgba(255,255,255,0.25)] hover:drop-shadow-[0_25px_25px_rgba(255,255,255,0.25)] ease-in-out pt-4 w-[1200px] h-[100%]`}>
+      <h1 className={`${styles.title} pl-10`}>Забронировать поездку</h1>
+      {/* <OrderStepper active={firstStep ? 1 : 2} handler={() => setFirstStep(p => !p)} /> */}
+      
+      <Formik
+        initialValues={{
+          user: {
+            name: "",
+            email: "",
+            phone: "",
+            comment:"",
+          },
+          route: {
+            route_id: 1,
+            departure_id: 0,
+            date: nowDate,
+            count: 0,
+          }
+        }}
+        onSubmit={(
+          values: IFromData,
+          { setSubmitting }: FormikHelpers<IFromData>
+        ) => {
+          setTimeout(() => {
+            alert(JSON.stringify(values, null, 2));
+            setSubmitting(false);
+          }, 500);
+        }}
+      >
+        {(props) => {
+          const { values, setFieldValue } = props
+          // console.log("7777", currentRoute?.attributes.departures.data);
+
+          return (
+            <Form className=" flex flex-col gap-2 pt-6 sm:px-2 lg:px-10 h-[fit-content]">
+              <div className="bg-transparent flex flex-col gap-2 h-[fit-content] w-[100%] items-center justify-center">
+
+<Stepper setComplete={setComplete} setCurrentStep={setCurrentStep} complete={complete} currentStep={currentStep} steps={steps}>
+  <div className="h-[320px] flex justify-center ">
+          {renderStep(currentStep, values, setFieldValue)}
+             
+              {/* {
+                !firstStep && 
+              } */}
+              <div className="flex flex-row justify-between w-[100%] h-[fit-content] ">
+
+                {/* <div onClick={() =>{
                   props.validateField('route.date')
                    setFirstStep(p => !p)
                 }} className="w-[160px] rounded h-12 mt-20 button border border-black flex justify-center items-center cursor-pointer">
@@ -208,13 +240,17 @@ const OrderForm: FC<Props> = ({ routes }) => {
                     firstStep ? "Продолжить" : "Назад"
                   }
 
-                </div>
+                </div> */}
                 {
                   !firstStep && <button type="submit" className="button border border-black w-[200px] rounded  h-12 mt-20 border border-black">Оставить заявку</button>
 
                 }
               </div>
+              </div>
 
+
+</Stepper>
+</div>
             </Form>
           )
         }}

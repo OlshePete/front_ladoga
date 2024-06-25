@@ -1,4 +1,4 @@
-import { AboutSectionData, Response, StartSectionData } from "../types/webSiteContentTypes";
+import { AboutSectionData, ContactInfoData, Response, StartSectionData } from "../types/webSiteContentTypes";
 import { wrapRequest } from "./utils";
 const { API_TOKEN, API_URL } = process.env
 const headers = {
@@ -47,7 +47,8 @@ const getContacts = async () => {
       "Ошибка при загрузке наполнения для сайта. Раздел контакты."
     );
 
-  return response.json();
+    const contacts_content:Response<ContactInfoData> = await response.json()
+    return contacts_content;
 };
 const getAbout = async () => {
   const response = await fetch(`${API_URL}/api/about?populate=*`, {

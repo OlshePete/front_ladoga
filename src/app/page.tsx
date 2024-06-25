@@ -1,6 +1,7 @@
 import ClientOrderForm from "../../components/client/ClientOrderForm/ClientOrderForm";
 import { OrderForm } from "../../components/client/ClientOrderForm/OrderForm";
 import { ScrollWrapper } from "../../components/client/motion/ScrollWrapper";
+import { ContactSection } from "../../components/server/sections/ContactSection/ContactSection";
 import { OrderSection } from "../../components/server/sections/OrderSection/OrderSection";
 import { ProjectSection } from "../../components/server/sections/ProjectSection/ProjectSection";
 import { RoutesListSection } from "../../components/server/sections/RoutesListSection/RoutesListSection";
@@ -12,8 +13,6 @@ import { wrappedGetRoutes } from "../../services/getRoutes";
 import {wrappedGetAbout,wrappedGetContacts,wrappedGetContent,wrappedGetIntro } from "../../services/getWebSiteContent";
 import styles from "./page.module.css";
 
-const API_URL = process.env.CMS_URL;
-const API_TOKEN = process.env.CMS_TOKEN;
 
 export default async function Home() {
 const routes = await wrappedGetRoutes()
@@ -40,15 +39,9 @@ console.log(routes);
      <p className="text-white">boats_gallery</p>
      <p className="text-white">boats_sale_summary_list</p>
      </section> */}
-     <section className="section">
 
-     {/* {routes && <ClientOrderForm routes={routes}/>} */}
      {routes && <OrderSection routes={routes}/>}
-
-     </section>
-     <section className="section" id="contacts">
-     <p>{JSON.stringify(contacts_content)}</p>
-     </section>
+  {contacts_content && <ContactSection contactContent={contacts_content} imgData={intro_content?.data.attributes.logo.data}/>}
 
      <TheFooter/>
      

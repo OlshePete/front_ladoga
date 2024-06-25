@@ -73,7 +73,7 @@ export type ImageFormat = {
       };
       logo:{
         data:Image
-    },
+      },
       video: Video;
     };
   };
@@ -116,6 +116,18 @@ export type ImageFormat = {
       publishedAt: string;
       time:string;
     }
+  }
+
+  export type ContactInfoData = {
+    id:number; 
+    attributes:{
+      address: string;
+      title: string;
+      summary: string;
+      content:any[];
+      phone_number:string;
+    }
+
   }
 
   export type Response<T> = {
