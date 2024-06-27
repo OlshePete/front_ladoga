@@ -9,8 +9,9 @@ interface Props {
     steps:Array<string>;
     setCurrentStep:React.Dispatch<React.SetStateAction<number>>;
     setComplete:React.Dispatch<React.SetStateAction<boolean>>;
+    validate:(index:number)=>boolean
 }
-const Stepper:FC<Props> = ({children, complete,currentStep,steps,setComplete,setCurrentStep }) => {
+const Stepper:FC<Props> = ({children, complete,currentStep,steps,setComplete,setCurrentStep, validate }) => {
 
   return (
     <>
@@ -54,9 +55,13 @@ const Stepper:FC<Props> = ({children, complete,currentStep,steps,setComplete,set
           type="button"
           onClick={(e) => {
               e.stopPropagation()
-            currentStep === steps.length
-              ? setComplete(true)
-              : setCurrentStep((prev) => prev + 1);
+              const isStepValid = validate(currentStep)
+              console.log('isStepValid',isStepValid)
+              if (isStepValid){
+                if (currentStep === steps.length){
+                  setComplete(true)
+                } else setCurrentStep((prev) => prev + 1);
+              }
           }}
         >
           {currentStep === steps.length ? "Бронировать" : "Дальше"}
