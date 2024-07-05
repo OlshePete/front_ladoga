@@ -1,6 +1,5 @@
 import { AboutSectionData, Response, RouteSectionData } from "../../../../types/webSiteContentTypes";
 import { OrderForm } from "../../../client/ClientOrderForm/OrderForm";
-import { TextWrapper } from "../../../client/motion/TextWrapper";
 import { AboutGallery } from "../../AboutGallery/AboutGallery";
 import styles from "./OrderSection.module.css";
 

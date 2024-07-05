@@ -1,3 +1,7 @@
+import { IFromData } from "../components/client/ClientOrderForm/OrderForm";
+import { IClientRequest, wrappedAddClient } from "./clients";
+import { IAddOrderRequest } from "./getOrders";
+
 export type RequestFunction = (...args: any[]) => Promise<any>;
 
 export function wrapRequest<T>(
@@ -14,4 +18,25 @@ export function wrapRequest<T>(
       return null;
     }
   };
+}
+export const generateRequestBody = async (body:IFromData):Promise<IAddOrderRequest> => {
+  const {route,user} = body
+  const client = await wrappedAddClient({
+    data:{
+      name:user.name,
+      phone:user.phone
+    }
+  })
+  if (!client) throw new Error('клиент не создан')
+  return {
+  data:{
+    client:client,
+    date:route.date,
+    count:route.count,
+    departure:route.departure_id,
+    route:route.route_id,
+    comment:user.comment
+  }
+}
+ 
 }

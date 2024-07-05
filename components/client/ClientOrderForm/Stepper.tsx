@@ -42,9 +42,7 @@ const Stepper:FC<Props> = ({children, complete,currentStep,steps,setComplete,set
           onClick={(e) => {
               e.stopPropagation()
             setCurrentStep((prev) => prev - 1);
-            if (currentStep === steps.length && complete) {
-              setComplete(false)
-            }
+            setComplete(false)
           }}
         >
           Назад

@@ -15,8 +15,8 @@ const StartSection = ({ content }: { content: Response<StartSectionData> }) => {
       <div className={styles.title_container}>
       <ScrollWrapperStartSection>
         <>
-        <h1 className={styles.title}>{title}</h1>
-        {sub_title && <h2 className={styles.sub_title}>{sub_title}</h2>}
+        <h1 className={`${styles.title} sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl `}>{title}</h1>
+        {sub_title && <h2 className={`${styles.sub_title} sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl `}>{sub_title}</h2>}
         </>
       </ScrollWrapperStartSection>
       </div>

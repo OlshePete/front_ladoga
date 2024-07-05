@@ -12,7 +12,7 @@ const TheHeader = ({ logo }: { logo: { data: TImage } }) => {
   return (
     <header className={styles.container}>
         <>
-          <div className={styles.content}>
+          <div className={`${styles.content} sm:px-2 md:px-10 lg:px-20 lg:px-30  xl:px-20`}>
             {/* <div className={styles.btn_container}>
             <ActionButton />
             </div> */}

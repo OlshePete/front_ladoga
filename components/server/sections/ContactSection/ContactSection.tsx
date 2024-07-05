@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { AboutSectionData, ContactInfoData, Image as IImage, Response, RouteSectionData } from "../../../../types/webSiteContentTypes";
 import { OrderForm } from "../../../client/ClientOrderForm/OrderForm";
-import { TextWrapper } from "../../../client/motion/TextWrapper";
 import { formatPhone } from "../../../utils/formatPhone";
 import { AboutGallery } from "../../AboutGallery/AboutGallery";
 import styles from "./ContactSection.module.css";

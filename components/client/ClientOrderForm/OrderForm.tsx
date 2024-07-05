@@ -1,12 +1,12 @@
 "use client";
 import "react-phone-input-2/lib/style.css";
+import {AddOrder} from './form-action'
 import { Field, Form, Formik, FormikErrors, FormikHelpers } from "formik";
 import React, { ChangeEvent, FC, useState } from "react";
 import styles from "./ClientOrderForm.module.css";
 import PhoneInput from "react-phone-input-2";
 import { Response, RouteSectionData } from "../../../types/webSiteContentTypes";
 import { LiaAtSolid } from "react-icons/lia";
-import OrderStepper from "./OrderStepper";
 import { formatDate } from "../../utils/formatDate";
 import Stepper from "./Stepper";
 import { formatDateToRender } from "../../utils/formatDateToRender";
@@ -25,7 +25,7 @@ interface RouteData {
   date: string;
   count: number;
 }
-interface IFromData {
+export interface IFromData {
   user: UserData;
   route: RouteData;
 }
@@ -48,6 +48,7 @@ const OrderForm: FC<Props> = ({ routes }) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [complete, setComplete] = useState(false);
 
+  console.log('render step complete', complete);
   const renderStep = (activeIndex: number, values: IFromData, setFieldValue: (field: string, value: any, shouldValidate?: boolean | undefined) => any, errors:FormikErrors<IFromData>) => {
 
     const currentRoute = routes.data.find(r => r.id === +values.route.route_id)
@@ -73,15 +74,15 @@ const OrderForm: FC<Props> = ({ routes }) => {
       case 2:
         return (<div key={`form-order-${activeIndex}-${steps[activeIndex - 1]}`}>
           <div className={`flex flex-col gap-4 items-end gap-2 sm:py-2 lg:py-10 `}>
-            <div className={`${errors.route?.date ?'error':""}w-[220px] flex flex-col items-end`}>
-              <label htmlFor="route.date" className="text-xs pb-2  ">Дата{errors.route?.date?` (${errors.route?.date})`:``}</label>
+            <div className={`${errors.route?.date ?styles.error:""} w-[220px] flex flex-col items-end`}>
+              <label htmlFor="route.date" className="text-xs pb-2  ">{errors.route?.date?`${errors.route?.date}`:`Дата`}</label>
               <Field as={'input'} id="route.date" name="route.date" type="date" min={nowDate}
-                error={false}
+                error={'false'}
                 onChange={(e: ChangeEvent<HTMLInputElement>) => setFieldValue('route.date', e.target.value)}
                 className="error h-12  px-4 rounded-sm outline outline-neutral-700 w-[100%] " />
             </div>
-            <div className="w-[220px]  flex flex-col items-end">
-              <label htmlFor="route.departure" className="text-xs pb-2" >Время отправления</label>
+            <div className={`w-[220px]  flex flex-col items-end ${errors.route?.route_id ?styles.error:""}`}>
+              <label htmlFor="route.departure" className="text-xs pb-2" >{errors.route?.route_id?`${errors.route?.route_id}`:`Время отправления`}</label>
               <Field as="select" id="route.departure" name="route.departure_id" className="h-12  w-full  rounded-sm px-4 outline outline-neutral-700"
                 disabled={values.route.route_id === 0}
               >
@@ -93,8 +94,8 @@ const OrderForm: FC<Props> = ({ routes }) => {
                 }
               </Field>
             </div>
-            <div className="w-[220px]  flex flex-col items-end">
-              <label htmlFor="route.count" className="text-xs pb-2" >Количество пассажиров</label>
+            <div className={`w-[220px]  flex flex-col items-end ${errors.route?.count ?styles.error:""}`}>
+              <label htmlFor="route.count" className="text-xs pb-2" >{errors.route?.count?`${errors.route?.count}`:`Количество пассажиров`}</label>
               <Field as="input" type='number' id="route.count" name="route.count" min="0" max="12" className="h-12  w-full rounded-sm px-4 outline outline-neutral-700"
               />
             </div>
@@ -102,11 +103,11 @@ const OrderForm: FC<Props> = ({ routes }) => {
         </div>)
       case 3:
         return (<div key={`form-order-${activeIndex}-${steps[activeIndex - 1]}`} className="flex flex-row gap-10  ">
-          <div className="flex flex-col gap-2 w-[300px] justify-center">
-            <label htmlFor="user.name" className="text-xs ">Ваше имя</label>
+          <div className={`flex flex-col gap-2 w-[300px] justify-center ${errors.user?.name ?styles.error:""}`}>
+            <label htmlFor="user.name" className="text-xs ">{errors.user?.name?`${errors.user?.name}`:`Ваше имя`}</label>
             <Field type="text" id="user.name" name="user.name" placeholder="Иван" className="h-12  border border-black rounded-md px-4 " />
 
-            <label htmlFor="user.phone" className="text-xs ">Телефон</label>
+            <label htmlFor="user.phone" className="text-xs ">{errors.user?.phone?`${errors.user?.phone}`:`Телефон`}</label>
 
             <PhoneInput
               inputStyle={{
@@ -153,8 +154,8 @@ const OrderForm: FC<Props> = ({ routes }) => {
                       : (format.match(/\./g)?.length as number | null);
                   // console.log('country',validNumberCount,'--',value.length, '//',countryCode,'//', format)
 
-                  if (!validNumberCount || value.length !== validNumberCount) {
-                    return "Номер не полный";
+                  if (!validNumberCount || value.length !== validNumberCount || errors.user?.phone) {
+                    return  "";
                   } else {
                     return true;
                   }
@@ -180,10 +181,12 @@ const OrderForm: FC<Props> = ({ routes }) => {
 
         </div>)
       case 4:
-        const { name } = routes.data.find(r => r.id === values.route.route_id)?.attributes ?? {}
+        const { name, departures } = routes.data.find(r => r.id === values.route.route_id)?.attributes ?? {}
+        const { time } = departures?.data[values.route.departure_id].attributes ?? {}
+        console.log("%%%",)
         return (<div key={`form-order-${activeIndex}-${steps[activeIndex - 1]}`} className='flex flex-col'>
           <h3 className="text-nowrap">{name}</h3>
-          <span className="text-nowrap">{formatDateToRender(new Date(values.route.date))} - {String(currentRoute?.attributes.departures.data[values.route.departure_id]?.attributes.time).slice(0, 5)}</span>
+          <span className="text-nowrap">{formatDateToRender(new Date(values.route.date))} {time?String('- '+time.slice(0,5)):""}</span>
           <span className="text-nowrap">мест забронировано - {values.route.count}</span>
           <span className="text-nowrap">сумма заказа - {(currentRoute?.attributes.price ?? 1) * values.route.count}</span>
         </div>)
@@ -213,20 +216,20 @@ const OrderForm: FC<Props> = ({ routes }) => {
             count: 0,
           }
         }}
-        onSubmit={(
+        onSubmit={async (
           values: IFromData,
-          { setSubmitting }: FormikHelpers<IFromData>
+          { setSubmitting,resetForm }: FormikHelpers<IFromData>
         ) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 500);
+         const res = await AddOrder(values);
+         if(res) {setCurrentStep(1);setComplete(false); resetForm()}
+          // setTimeout(() => {
+          //   setSubmitting(false);
+          // }, 500);
         }}
       >
         {(props) => {
-          const { values, setFieldValue, setFieldError, errors } = props
+          const { values, setFieldValue, setFieldError, errors,submitForm } = props
           console.log(errors);
-
           // console.log("7777", currentRoute?.attributes.departures.data);
           const validateStep = (activeIndex: number): boolean => {
           console.log('valid', activeIndex);
@@ -234,23 +237,20 @@ const OrderForm: FC<Props> = ({ routes }) => {
             switch (activeIndex) {
               case 1:
                 if (routes.data.find(r => r.id === +values.route.route_id)) {
-                  result = true;
-                  break;
+                  return true;
                 } else {
                   setFieldError('route.route_id', 'Маршрут не выбраны')
-                  result = false;
-                  break;
+                  return false
                 }
               case 2:
+                result = true
                 if (values.route.count<=0) {
                   result =  false
                   setFieldError('route.count', 'Количество не может быть 0 или отрицательным')
-                  break;
                 }
                 if (new Date(values.route.date).valueOf()<new Date().valueOf()) {
                   result = false
                   setFieldError('route.date', 'Дата не может быть в прошлом')
-                  break;
                 }
                 // if (new Date(values.route.date).getHours()<new Date().getHours()) {
                 // TODO validate departure time by current time
@@ -261,29 +261,36 @@ const OrderForm: FC<Props> = ({ routes }) => {
                   // result =  false
                   // break;
                 // } 
-                 result = true
-                break;
+                return result
               case 3:
                 if (values.user.name.length === 0) {
                   result = false
-                  setFieldError('user.name', 'Обязательное поле')
-                  break
+                  setFieldError('user.name', 'Обязательное поле')                
+                  return result
                 }
                 if (values.user.name.length < 2) {
                   result = false
-                  setFieldError('user.name', 'Имя слишком короткое')
-                  break
+                  setFieldError('user.name', 'Имя слишком короткое')              
+                  return result
                 }
-                result = true
-                break;
-              case 4:
-
-                break;
-
-              default:
-                break;
+                if (values.user.name.length < 2) {
+                  result = false
+                  setFieldError('user.name', 'Имя слишком короткое')              
+                  return result
+                }
+                if (values.user.phone.length < 11) {
+                  result = false
+                  setFieldError('user.phone', 'Номер не существует')              
+                  return result
+                }
+                result = true              
+                return result
+              case 4: 
+               submitForm()  
+              return true
+              default:           
+                return result
             }
-            return result
           }
           return (
             <Form className=" flex flex-col gap-2 pt-6 sm:px-2 lg:px-10 h-[fit-content]">
@@ -297,7 +304,7 @@ const OrderForm: FC<Props> = ({ routes }) => {
                   steps={steps}
                   validate={validateStep}
                 >
-                  <div className="h-[320px] flex justify-center ">
+                  <div className={`h-[320px] flex justify-center ${styles.form_step}`}>
                     {renderStep(currentStep, values, setFieldValue, errors)}
 
                     {/* {

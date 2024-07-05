@@ -5,19 +5,17 @@
     gap:2rem;
     width: 100%;
     min-height: 80vh;
-
 }
 .content {
     display: flex;
-    height: 60vh;
     color: white;
-    margin: 20vh 0;
+}
+.content_title {
 }
 .content > div:first-child{
-    border-right: 2px solid rgba(255, 255, 255, 0.2);
+    /* border-right: 2px solid rgba(255, 255, 255, 0.2); */
 }
 .content > div {
-    width: 50%;
     align-items: center;
     min-height: 100%;
     display: flex;
@@ -37,10 +35,7 @@
 }
 .text {
     font-family: var(--font-content);
-    padding: auto 0;
     display: block;
     font-weight: 400;
-    padding-left: 2rem;
     text-align: left;
-    max-width: 40vw;
 }

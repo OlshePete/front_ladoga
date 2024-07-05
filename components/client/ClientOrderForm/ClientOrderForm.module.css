@@ -3,17 +3,27 @@
     font-size: 2rem;
     color: black;
 }
+
 .route_title {
     font-family: var(--font-content);
     font-size: 1.4rem;
     color: black;
 }
+
 .container {
     font-family: var(--font-content);
     font-size: 1.4rem;
     border-radius: 8px;
     background-color: whitesmoke;
 }
+
+.error,
+.error * {
+    border-color: darkred;
+    color: red
+}
+
+
 /* .container > * > * > * > *,
 .container > * > * > *  {
     outline:1px solid

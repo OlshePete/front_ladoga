@@ -25,3 +25,42 @@
     position: absolute;
     top:100%;
 }
+/* Media queries for smaller breakpoints */
+@media (max-width: 1024px) { /* lg breakpoint */
+    .imageContainer {
+        min-width: 300px;
+        height: 300px;
+    }
+    .imageContainer.labled {
+        width: 300px;
+        height: 360px;
+    }
+}
+
+@media (max-width: 768px) { /* md breakpoint */
+    .imageContainer {
+        min-width: 200px;
+        height: 200px;
+    }
+    .imageContainer.labled {
+        width: 200px;
+        height: 240px;
+    }
+    .image_caption {
+        font-size: medium;
+    }
+}
+
+@media (max-width: 480px) { /* sm breakpoint */
+    .imageContainer {
+        min-width: 150px;
+        height: 150px;
+    }
+    .imageContainer.labled {
+        width: 150px;
+        height: 180px;
+    }
+    .image_caption {
+        font-size: small;
+    }
+}

@@ -12,7 +12,7 @@ const AboutGallery = ({images, withLabels=true}:{withLabels?:boolean,images:{dat
       height={'-50rem'}
     >
 
-    <div className={styles.container}>
+    <div className={`${styles.container} `}>
       {image_list && Array.isArray(image_list) && image_list?.map((image) => (
         <div
         key={`product-gallery-${image.id}`}
