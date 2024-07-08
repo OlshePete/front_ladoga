@@ -1,6 +1,3 @@
-import ClientOrderForm from "../../components/client/ClientOrderForm/ClientOrderForm";
-import { OrderForm } from "../../components/client/ClientOrderForm/OrderForm";
-import { ScrollWrapper } from "../../components/client/motion/ScrollWrapper";
 import { ContactSection } from "../../components/server/sections/ContactSection/ContactSection";
 import { OrderSection } from "../../components/server/sections/OrderSection/OrderSection";
 import { ProjectSection } from "../../components/server/sections/ProjectSection/ProjectSection";

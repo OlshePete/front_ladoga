@@ -1,7 +1,6 @@
 import { IFromData } from "../components/client/ClientOrderForm/OrderForm";
-import { AboutSectionData, IOrder, Response, RouteSectionData } from "../types/webSiteContentTypes";
+import { IOrder, Response } from "../types/webSiteContentTypes";
 import { newOrderNotificationBot } from "./bot";
-import { wrappedAddClient } from "./clients";
 import { generateRequestBody, wrapRequest } from "./utils";
 
 const { API_TOKEN, API_URL } = process.env
