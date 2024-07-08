@@ -1,6 +1,6 @@
 'use client'
 import React, { FC } from "react";
-import "./stepper.css";
+import "./Stepper.css";
 import { TiTick } from "react-icons/ti";
 interface Props {
     children: JSX.Element;

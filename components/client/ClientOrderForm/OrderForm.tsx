@@ -10,6 +10,7 @@ import { formatDate } from "../../utils/formatDate";
 import Stepper from "./Stepper";
 import { formatDateToRender } from "../../utils/formatDateToRender";
 import { FormComplete } from "./FormComplete";
+import { IOrderResponse } from "../../../services/orders";
 interface Props {
   routes: Response<RouteSectionData[]>
 }
@@ -46,7 +47,7 @@ const OrderForm: FC<Props> = ({ routes }) => {
   ];
   const [currentStep, setCurrentStep] = useState(1);
   const [completeStepper, setCompleteStepper] = useState(false);
-  const [formComplete, setFormComplete] = useState<IOrder | null>(null) 
+  const [formComplete, setFormComplete] = useState<IOrderResponse | null>(null) 
   const renderStep = (activeIndex: number, values: IFromData, setFieldValue: (field: string, value: any, shouldValidate?: boolean | undefined) => any, errors: FormikErrors<IFromData>) => {
 
     const currentRoute = routes.data.find(r => r.id === +values.route.route_id)
