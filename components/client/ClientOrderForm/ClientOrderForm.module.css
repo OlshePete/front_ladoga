@@ -24,7 +24,22 @@
 }
 
 
-/* .container > * > * > * > *,
-.container > * > * > *  {
-    outline:1px solid
-} */
+/* Media queries for smaller breakpoints */
+
+@media (max-width: 1024px) {
+    /* lg breakpoint */
+}
+
+@media (max-width: 768px) {
+    /* md breakpoint */
+    .title {
+        font-size: large;
+    }
+}
+
+@media (max-width: 480px) {
+    /* sm breakpoint */
+    .title {
+        font-size: medium;
+    }
+}

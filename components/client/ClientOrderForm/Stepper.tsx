@@ -1,5 +1,5 @@
 'use client'
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import "./stepper.css";
 import { TiTick } from "react-icons/ti";
 interface Props {
@@ -15,7 +15,7 @@ const Stepper:FC<Props> = ({children, complete,currentStep,steps,setComplete,set
 
   return (
     <>
-      <div className="flex justify-between">
+      <div className="flex justify-between scale-[.6] xs:scale-[.9] sm:scale-[1]">
         {steps?.map((step, i) => (
           <div
             key={i}
@@ -32,7 +32,7 @@ const Stepper:FC<Props> = ({children, complete,currentStep,steps,setComplete,set
       </div>
       {children}
       <div
-        className="pb-20 flex items-center gap-60 border w-[50%] justify-center"
+        className="pb-20 flex items-center gap-20 w-[50%] justify-center xs:gap-20 sm:gap-60"
       >
         
         <button

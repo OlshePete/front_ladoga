@@ -20,7 +20,7 @@ interface IClientResponse extends Response<{
       }
   }
   const addClient = async (clientData: IClientRequest) => {
-    const response = await fetch(`${API_URL}/clients`, {
+    const response = await fetch(`${API_URL}/api/clients/`, {
       method: 'POST',
       headers: {
         ...headers,

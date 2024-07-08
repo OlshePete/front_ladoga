@@ -134,3 +134,60 @@ export type ImageFormat = {
     data: T;
     meta: any;
   };
+
+  export interface IOrder {
+    id: number;
+    attributes: {
+      count: number;
+      in_procces: boolean;
+      comment: string;
+      createdAt: string; // ISO 8601 date string
+      updatedAt: string; // ISO 8601 date string
+      date: string; // ISO 8601 date string
+      client: Client;
+      route: Route;
+      departure: Departure;
+    };
+  }
+  
+  
+  interface Client {
+    data: {
+      id: number;
+      attributes: {
+        name: string;
+        createdAt: string; // ISO 8601 date string
+        updatedAt: string; // ISO 8601 date string
+        phone: string;
+      };
+    };
+  }
+  
+  interface Route {
+    data: {
+      id: number;
+      attributes: {
+        name: string;
+        description: string;
+        summary: string;
+        price: number;
+        duration: number;
+        createdAt: string; // ISO 8601 date string
+        updatedAt: string; // ISO 8601 date string
+        publishedAt: string; // ISO 8601 date string
+      };
+    };
+  }
+  
+  interface Departure {
+    data: {
+      id: number;
+      attributes: {
+        time: string; // time string in format HH:mm:ss.SSS
+        createdAt: string; // ISO 8601 date string
+        updatedAt: string; // ISO 8601 date string
+        publishedAt: string; // ISO 8601 date string
+      };
+    };
+  }
+  

@@ -1,6 +1,6 @@
 import { IFromData } from "../components/client/ClientOrderForm/OrderForm";
-import { IClientRequest, wrappedAddClient } from "./clients";
-import { IAddOrderRequest } from "./getOrders";
+import { wrappedAddClient } from "./clients";
+import { IAddOrderRequest } from "./orders";
 
 export type RequestFunction = (...args: any[]) => Promise<any>;
 
@@ -33,10 +33,11 @@ export const generateRequestBody = async (body:IFromData):Promise<IAddOrderReque
     client:client,
     date:route.date,
     count:route.count,
-    departure:route.departure_id,
+    departure:Number(route.departure_id),
     route:route.route_id,
     comment:user.comment
-  }
+  },
+  populate: "*"
 }
  
 }

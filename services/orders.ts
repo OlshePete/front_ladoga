@@ -57,6 +57,7 @@ export interface IOrderResponse extends Response<IOrder> {}
   }
   const addOrder = async (props:IFromData) => {
     const orderData = await generateRequestBody(props)
+    console.log('orderData', orderData)
     const response = await fetch(`${API_URL}/api/orders?populate=*`, {
       method: 'POST',
       headers: {
@@ -70,8 +71,6 @@ export interface IOrderResponse extends Response<IOrder> {}
   
     const data: IOrderResponse = await response.json();
     console.log('Заказ добавлен успешно');
-    const notice = await newOrderNotificationBot(data)
-    console.log('bot-notice', notice)
     return data;
   };
   
