@@ -74,7 +74,7 @@ export type ImageFormat = {
       logo:{
         data:Image
       },
-      video: Video;
+      video: Response<Video>;
     };
   };
   export type AboutSectionData = {
@@ -102,6 +102,7 @@ export type ImageFormat = {
         createdAt: string;
         updatedAt: string;
         publishedAt: string;
+        boatsCount?: number;
         departures:Response<RouteDepartureData[]>;
         images:{
             data:Image[]

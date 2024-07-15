@@ -19,7 +19,7 @@ const ScrollWrapperStartSection:FC<Props> = ({children, opposite = false}) => {
           translateY:opposite?bottom:top,
           // position:'relative',
           // top:top,
-          zIndex:12
+          zIndex:3
         }}
       >
             {children}

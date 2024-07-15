@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Open_Sans, Dela_Gothic_One } from "next/font/google";
-import "./globals.css";
+import "./globals.scss";
 
 const deltaGO = Dela_Gothic_One({
   subsets: ["cyrillic"],
@@ -24,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ru">
+    <html lang="ru" style={{scrollBehavior:'smooth'}}>
       <body className={`${deltaGO.variable} ${openSans.variable}`}>
         {children}
       </body>

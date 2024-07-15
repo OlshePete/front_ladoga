@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import { ScrollWrapperHeaderSeparator } from '../motion/ScrollWrapperHeaderSeparator'
-import styles from './Header.module.css'
+import styles from './Header.module.scss'
 const HeaderSeparator = () => {
   return (
       <ScrollWrapperHeaderSeparator>

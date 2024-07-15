@@ -1,6 +1,6 @@
 import { Response, RouteSectionData } from "../../../../types/webSiteContentTypes";
 import { OrderForm } from "../../../client/ClientOrderForm/OrderForm";
-import styles from "./OrderSection.module.css";
+import styles from "./OrderSection.module.scss";
 
 const OrderSection = ({routes}:{routes:Response<RouteSectionData[]>}) => {
     return (

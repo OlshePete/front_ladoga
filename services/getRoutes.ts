@@ -8,9 +8,6 @@ const headers = {
 async function getRoutes() {
   console.log(API_URL)
   const response = await fetch(`${API_URL}/api/routes?populate=*`, {
-    next: {
-      revalidate: 10,
-    },
     headers,
   });
 

@@ -1,13 +1,13 @@
 import { AboutSectionData, Response } from "../../../../types/webSiteContentTypes";
 import { TextWrapper } from "../../../client/motion/TextWrapper";
 import { AboutGallery } from "../../AboutGallery/AboutGallery";
-import styles from "./ProjectSection.module.css";
+import styles from "./ProjectSection.module.scss";
 
 const ProjectSection = ({ content }: { content: Response<AboutSectionData> }) => {
   const { title, sub_title, images } = content.data.attributes
   const text = content.data.attributes.content
   return (
-    <section className={`${styles.container} section`}>
+    <section className={`${styles.container} section`} id="about">
       <div className={`${styles.content} w-[100%] flex-col sm:flex-col md:flex-col lg:flex-row`} >
         <div className={`${styles.content_title} min-w-[48%] sm:min-w-[100%] lg:min-w-[50%]  sm:mb-[4vw] lg:mb-[20vw]`}>
           <TextWrapper opposite tag="h2" containerClass={`${styles.title} text-xl sm:text-sm md:text-lg`} styles={{fontSize:'2rem'}}>{title}</TextWrapper>

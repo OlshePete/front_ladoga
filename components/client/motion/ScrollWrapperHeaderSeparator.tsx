@@ -8,7 +8,7 @@ interface Props {
 const ScrollWrapperHeaderSeparator:FC<Props> = ({children}) => {
     const scroll = useScroll()
     const { scrollYProgress } = scroll
-    const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
+    const opacity = useTransform(scrollYProgress, [0, 0.1], [1, 0]);
       
     return (
       <motion.div

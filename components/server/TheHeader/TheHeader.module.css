@@ -1,7 +1,7 @@
 .container {
     position: sticky;
     width: 100vw;
-    top:0;
+    top: 0;
     z-index: 12;
     height: 110px;
     background-color: transparent;
@@ -11,6 +11,7 @@
     justify-content: space-between;
     /* overflow: hidden; */
 }
+
 .content {
     width: 100%;
     /* padding: 0 10vw; */
@@ -21,17 +22,18 @@
     justify-content: flex-start;
     /* background-color: blue; */
     /* justify-content: space-between; */
-    color:white;
+    color: white;
 }
+
 .btn_container {
     flex-grow: 1;
 }
+
 .logo {
     /* position: absolute;
     left:calc(50% - 120px); */
     /* width: 240px;
     height: 80px; */
-    
     display: flex;
     justify-content: flex-start;
 }

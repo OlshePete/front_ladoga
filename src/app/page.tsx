@@ -5,10 +5,11 @@ import { RoutesListSection } from "../../components/server/sections/RoutesListSe
 import { RoutesSection } from "../../components/server/sections/RoutesSection/RoutesSection";
 import { StartSection } from "../../components/server/sections/StartSection/StartSection";
 import { TheFooter } from "../../components/server/TheFooter/TheFooter";
-import { TheHeader } from "../../components/server/TheHeader/TheHeader";
+// import { TheHeader } from "../../components/server/TheHeader/TheHeader";
 import { wrappedGetRoutes } from "../../services/getRoutes";
 import {wrappedGetAbout,wrappedGetContacts,wrappedGetContent,wrappedGetIntro } from "../../services/getWebSiteContent";
-import styles from "./page.module.css";
+import styles from "./page.module.scss";
+import { HeaderGlobal } from "../../components/client/header/new/header";
 
 
 export default async function Home() {
@@ -25,11 +26,12 @@ console.log(routes);
     <main className={styles.main} >
 
       {/* <header style={{color:'white'}}>{JSON.stringify(data)}</header> */}
-      {intro_content?.data.attributes.logo && <TheHeader logo={intro_content.data.attributes.logo}/>}
+      {intro_content?.data.attributes.logo && <HeaderGlobal logo={intro_content.data.attributes.logo}/>}
+      {/* logo={intro_content.data.attributes.logo}/>} */}
      {intro_content && <StartSection content={intro_content}/>}
     {about_content && <ProjectSection content={about_content}/>}
-     {routes && <RoutesSection routes={routes}/>}
      {routes && <RoutesListSection routes={routes}/>}
+     {routes && <RoutesSection routes={routes}/>}
      {}
      {/* <section className="section">
      <button className="btn btn-primary text-white">boats_summary</button>
@@ -38,7 +40,7 @@ console.log(routes);
      </section> */}
 
      {routes && <OrderSection routes={routes}/>}
-  {contacts_content && <ContactSection contactContent={contacts_content} imgData={intro_content?.data.attributes.logo.data}/>}
+  {intro_content?.data.attributes.video && contacts_content && <ContactSection contactContent={contacts_content} videoData={intro_content?.data.attributes.video}/>}
 
      <TheFooter/>
      

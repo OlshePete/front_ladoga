@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Response, RouteSectionData } from "../../../../types/webSiteContentTypes";
 import { TextWrapper } from "../../../client/motion/TextWrapper";
 import { ActionButton } from "../../buttons/ActionButton/ActionButton";
-import styles from "./RoutesSection.module.css";
+import styles from "./RoutesSection.module.scss";
 
 const RoutesSection = ({ routes }: { routes: Response<RouteSectionData[]> }) => {
   const API_URL = process.env.API_URL

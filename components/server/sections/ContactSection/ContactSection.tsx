@@ -1,31 +1,44 @@
 import Image from "next/image";
-import { ContactInfoData, Image as IImage, Response } from "../../../../types/webSiteContentTypes";
+import { ContactInfoData, Image as IImage, Response, Video } from "../../../../types/webSiteContentTypes";
 import { formatPhone } from "../../../utils/formatPhone";
-import styles from "./ContactSection.module.css";
+import styles from "./ContactSection.module.scss";
 import { BlocksRenderer } from '@strapi/blocks-react-renderer';
-const ContactSection = ({contactContent, imgData}:{contactContent:Response<ContactInfoData>, imgData:IImage | undefined}) => {
+import VideoSection from "../VideoSection/VideoSection";
+import YandexMapLink from "../../buttons/YandexMapLink/YandexMapLink";
+const ContactSection = ({contactContent, videoData}:{contactContent:Response<ContactInfoData>, videoData:Response<Video> | undefined}) => {
   const {title,content,summary,address, phone_number } = contactContent.data.attributes
     return (
-      <section  className={`${styles.container} section flex sm:flex-col md:flex-row justify-center`} id="contacts"> 
-      <div className="w-[50%]  flex flex-col items-center justify-between">
-
-     {imgData && <Image
-      src={process.env.API_URL + (imgData.attributes.formats.small.url || "")}
-      alt={imgData.attributes.alternativeText || ""}
-      className={styles.image}
-      width="220"
-      height="100"
-      />}
-      <BlocksRenderer content={content} />
+      <section  className={`${styles.container} section flex flex-wrap sm:flex-col md:flex-row items-center justify-center`} id="contacts"> 
+      <div className="w-[100%] h-[30%] flex flex-row sm:flex-col items-start justify-end pl-[4px] sm:pl-[40px] md:pl-[240px]">
+      {/* {
+        title.split(/\s+/).map((word,index)=>{
+          return(<h2 key={index+word} className={`${styles.title}  w-[auto] leading-none ${index%2===0?'right-1 xs:right-1 sm:right-4 md:right-54':'right-2 xs:right-1 sm:right-4 md:right-52'}  `}>{word}</h2>)
+        })
+      } */}
+         <h2 key={title} className={`${styles.title}  w-[auto] leading-none  `}>{title}</h2>
 
       </div>
-      <div className={`w-[50%]  flex flex-col gap-2  border-left ${styles.content}`}>
+      <div className="w-[100%] h-[40vh] flex flex-grow">
+      <div className="hidden sm:flex w-[30%] lg:w--[30%] text-left flex flex-col items-center justify-start">
+      </div>
+
+      <div className={`border-t-white border-t-[1px] w-[50%] flex-grow flex flex-col gap-2  border-left ${styles.content}`}>
        
-      <h2 className={`${styles.title} pt-4`}>{title}</h2>
-      <div>
-        <span className={``}>{formatPhone(phone_number)}</span>
-        <address className={``}>{address}</address>
+      
+      <div className={`py-10 pr-4 flex justify-center gap-4 sm:gap-20 md:gap-40 flex-col sm:flex-row`}>
+        <div className="flex flex-col items-center gap-6">
+          <span className="uppercase text-lg opacity-60">Телефон</span>
+        <span className={`hover:underline underline-offset-2`}><a  href={`tel:+7${phone_number}`}>{formatPhone(phone_number)}</a></span>
+        </div>
+        <div className="flex flex-col items-center gap-6">
+          <span className="uppercase text-lg  opacity-60">адрес</span>
+          <YandexMapLink address={address}/>
+        
+        </div>
       </div>
+      <div className={`border-t-white border-t-[1px]`}></div>
+      </div>
+
       </div>
       </section>
     );

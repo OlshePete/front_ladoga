@@ -3,7 +3,7 @@ import "react-phone-input-2/lib/style.css";
 import { AddOrder } from './form-action'
 import { Field, Form, Formik, FormikErrors, FormikHelpers } from "formik";
 import React, { ChangeEvent, FC, useState } from "react";
-import styles from "./ClientOrderForm.module.css";
+import styles from "./ClientOrderForm.module.scss";
 import PhoneInput from "react-phone-input-2";
 import { IOrder, Response, RouteSectionData } from "../../../types/webSiteContentTypes";
 import { formatDate } from "../../utils/formatDate";

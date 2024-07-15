@@ -1,7 +1,7 @@
 'use client'
 import React, { FC, useEffect, useState } from 'react';
 import { BiMenuAltLeft } from "react-icons/bi";
-import styles from './Header.module.css'
+import styles from './Header.module.scss'
 const OverlayMenu:FC<{}> = ({}) => {
   const [menuOpen, setMenuOpen] = useState(false);
 

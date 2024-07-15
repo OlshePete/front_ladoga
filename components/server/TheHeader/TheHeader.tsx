@@ -1,4 +1,4 @@
-import styles from "./TheHeader.module.css";
+import styles from "./TheHeader.module.scss";
 import { Image as TImage } from "../../../types/webSiteContentTypes";
 import Image from "next/image";
 import { ActionButton } from "../buttons/ActionButton/ActionButton";
