@@ -9,7 +9,7 @@ import { TheFooter } from "../../components/server/TheFooter/TheFooter";
 import { wrappedGetRoutes } from "../../services/getRoutes";
 import {wrappedGetAbout,wrappedGetContacts,wrappedGetContent,wrappedGetIntro } from "../../services/getWebSiteContent";
 import styles from "./page.module.scss";
-import { HeaderGlobal } from "../../components/client/header/new/header";
+import { HeaderGlobal } from "../../components/client/header/new/Header";
 
 
 export default async function Home() {

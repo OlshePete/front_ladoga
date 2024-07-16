@@ -30,7 +30,7 @@ const HeaderGlobal = ({ logo }: { logo: { data: TImage } }) => {
         <div className={styles.header}>
 
         <Image
-          src={'http://localhost:1337' + (logo.data.attributes.formats.small.url || "")}
+          src={API_URL+ (logo.data.attributes.formats.small.url || "")}
           alt={logo.data.attributes.alternativeText || ""}
           className={styles.image}
           width="120"
