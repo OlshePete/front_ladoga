@@ -3,7 +3,7 @@ import styles from './style.module.scss';
 import { motion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import { menuSlide } from '../anim';
-import {ALink} from './link';
+import {ALink} from './Link';
 import { BiLogoTelegram, BiLogoVk, BiLogoYoutube } from 'react-icons/bi';
 import Link from 'next/link';
 
