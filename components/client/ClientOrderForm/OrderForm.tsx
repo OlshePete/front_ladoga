@@ -201,7 +201,6 @@ const OrderForm: FC<Props> = ({ routes }) => {
       hover:drop-shadow-[0_25px_25px_rgba(255,255,255,0.25)] 
       ease-in-out 
       pt-4 
-      w-[1200px] 
       min-h-[100%]
     `}>
       <h1 className={`${styles.title} text-center xs:text-center sm:text-center  md:text-center lg:text-left lg:pl-40 `}>Забронировать поездку</h1>

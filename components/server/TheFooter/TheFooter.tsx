@@ -5,7 +5,7 @@ import styles from './TheFooter.module.scss'
 const TheFooter = () => {
   return (
   <footer className={`${styles.container} footer footer-center bg-base-200 text-base-content rounded p-10`}>
-  <nav className="grid grid-flow-col gap-4">
+  <nav className="flex flex-wrap gap-4 justify-center">
     <Link href={'#intro'} className="link link-hover">В начало</Link>
     <Link href={'#routes-list'} className="link link-hover">Маршруты</Link>
     <Link href={'#new-order'} className="link link-hover">Бронирование</Link>

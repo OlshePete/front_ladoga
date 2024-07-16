@@ -8,7 +8,7 @@ interface Props {
   opposite?: boolean;
   containerClass?: string;
   tag?: keyof JSX.IntrinsicElements; // add this prop
-  styles?: React.scssProperties; // add this prop
+  styles?: React.CSSProperties; // add this prop
 }
 
 const TextWrapper = ({

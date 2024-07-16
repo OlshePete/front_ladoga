@@ -9,12 +9,7 @@ const ContactSection = ({contactContent, videoData}:{contactContent:Response<Con
   const {title,content,summary,address, phone_number } = contactContent.data.attributes
     return (
       <section  className={`${styles.container} section flex flex-wrap sm:flex-col md:flex-row items-center justify-center`} id="contacts"> 
-      <div className="w-[100%] h-[30%] flex flex-row sm:flex-col items-start justify-end pl-[4px] sm:pl-[40px] md:pl-[240px]">
-      {/* {
-        title.split(/\s+/).map((word,index)=>{
-          return(<h2 key={index+word} className={`${styles.title}  w-[auto] leading-none ${index%2===0?'right-1 xs:right-1 sm:right-4 md:right-54':'right-2 xs:right-1 sm:right-4 md:right-52'}  `}>{word}</h2>)
-        })
-      } */}
+      <div className="w-[100%] h-[30%] flex flex-row sm:flex-col items-start pl-[4px] sm:pl-[40px] md:pl-[240px]">
          <h2 key={title} className={`${styles.title}  w-[auto] leading-none  `}>{title}</h2>
 
       </div>
