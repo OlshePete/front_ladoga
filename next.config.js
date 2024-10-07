@@ -6,6 +6,7 @@ const nextConfig = {
         API_URL: process.env.API_URL,
         TEST_ENV: "testikula"
     },
+    optimizeFonts: false,
     images: {
         remotePatterns: [{
                 protocol: 'https',
