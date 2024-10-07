@@ -3,7 +3,7 @@ import { Open_Sans, Dela_Gothic_One } from "next/font/google";
 import "./globals.scss";
 import localFont from 'next/font/local'
 const deltaGO = localFont({
-  src:"public/Dela_Gothic_One/DelaGothicOne-Regular.ttf",
+  src:"../styles/fonts/Dela_Gothic_One/DelaGothicOne-Regular.ttf",
   // subsets: ["cyrillic"],
   // weight: "400",
   variable: "--font-header",
