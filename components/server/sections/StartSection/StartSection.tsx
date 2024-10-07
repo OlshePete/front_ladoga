@@ -43,9 +43,9 @@ const StartSection = ({ content }: { content: Response<StartSectionData> }) => {
         <div className={styles.title_container}>
           <ScrollWrapperStartSection>
             <div className="flex flex-col gap-2 items-center">
-              <h1 className={`${styles.title}  uppercase`}>{"Магия севера" ?? title}</h1>
-              {true && <h2 className={`${styles.sub_title}  `}>{"путешествия по  Ладожскому озеру" ?? sub_title}</h2>}
-              {true && <h2 className={`${styles.sub_title}  `}>{"город Сортавала" ?? sub_title}</h2>}
+              <h1 className={`${styles.title}  uppercase`}>{"Магия севера"} </h1>{/*</div>?? title}</h1>*/}
+              {true && <h2 className={`${styles.sub_title}  `}>{"путешествия по  Ладожскому озеру" }</h2>} {/* </div>?? sub_title}</h2> */}
+              {true && <h2 className={`${styles.sub_title}  `}>{"город Сортавала" }</h2>} {/* ?? sub_title}</h2>} */}
 
             </div>
           </ScrollWrapperStartSection>
