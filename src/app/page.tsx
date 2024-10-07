@@ -1,48 +1,52 @@
 import { ContactSection } from "../../components/server/sections/ContactSection/ContactSection";
 import { OrderSection } from "../../components/server/sections/OrderSection/OrderSection";
-import { ProjectSection } from "../../components/server/sections/ProjectSection/ProjectSection";
-import { RoutesListSection } from "../../components/server/sections/RoutesListSection/RoutesListSection";
-import { RoutesSection } from "../../components/server/sections/RoutesSection/RoutesSection";
 import { StartSection } from "../../components/server/sections/StartSection/StartSection";
 import { TheFooter } from "../../components/server/TheFooter/TheFooter";
-// import { TheHeader } from "../../components/server/TheHeader/TheHeader";
 import { wrappedGetRoutes } from "../../services/getRoutes";
-import {wrappedGetAbout,wrappedGetContacts,wrappedGetContent,wrappedGetIntro } from "../../services/getWebSiteContent";
+import { wrappedGetServices, wrappedGetContacts, wrappedGetContent, wrappedGetIntro } from "../../services/getWebSiteContent";
 import styles from "./page.module.scss";
-import { HeaderGlobal } from "../../components/client/header/new/Header";
+// import CookieNotification from "../../components/client/CookieNotification";
+import { AboutSection } from "../../components/server/sections/AboutSection/AboutSection";
+import { NewRoutesSection } from "../../components/server/sections/NewRoutesSection/NewRoutesSection";
+import HorizontalListSection from "../../components/server/sections/HorizontalListSection";
+import TheHeader from "../../components/server/TheHeader";
+import CallBackButton from "../../components/client/ui/buttons/CallBackButton";
+import dynamic from "next/dynamic";
 
+// const AboutSection = dynamic(() => import('../../components/server/sections/AboutSection/AboutSection'))
+const CookieNotification = dynamic(() => import('../../components/client/CookieNotification'), { ssr: false })
 
 export default async function Home() {
-const routes = await wrappedGetRoutes()
-const content = await wrappedGetContent()
-const intro_content = await wrappedGetIntro()
-const about_content = await wrappedGetAbout()
-const contacts_content = await wrappedGetContacts()
-// console.log('process.env.CMS_URL home',process.env.CMS_URL)
-console.log(routes);
-
+  const routes = await wrappedGetRoutes()
+  const services = await wrappedGetServices()
+  // const content = await wrappedGetContent()
+  const intro_content = await wrappedGetIntro()
+  const links = [
+    { name: 'описание', url: '/#about' },
+    { name: 'маршруты', url: '/#top-routes' },
+    { name: 'контакты', url: '/#contacts' },
+    { name: 'цены', url: '/#new-order' }
+  ];
 
   return (
     <main className={styles.main} >
-
-      {/* <header style={{color:'white'}}>{JSON.stringify(data)}</header> */}
-      {intro_content?.data.attributes.logo && <HeaderGlobal logo={intro_content.data.attributes.logo}/>}
-      {/* logo={intro_content.data.attributes.logo}/>} */}
-     {intro_content && <StartSection content={intro_content}/>}
-    {about_content && <ProjectSection content={about_content}/>}
-     {routes && <RoutesListSection routes={routes}/>}
-     {routes && <RoutesSection routes={routes}/>}
-     {/* <section className="section">
-     <button className="btn btn-primary text-white">boats_summary</button>
-     <p className="text-white">boats_gallery</p>
-     <p className="text-white">boats_sale_summary_list</p>
-     </section> */}
-
-     {routes && <OrderSection routes={routes}/>}
-  {intro_content?.data.attributes.video && contacts_content && <ContactSection contactContent={contacts_content} videoData={intro_content?.data.attributes.video}/>}
-
-     <TheFooter/>
-     
+      {
+        intro_content?.data.attributes.logo &&
+        <TheHeader 
+          logo={intro_content?.data.attributes.logo} 
+          links={links} 
+        />
+        }
+      {intro_content && <StartSection content={intro_content} />}
+      <AboutSection />
+      {routes && <NewRoutesSection routes={routes} />}
+      {routes && <OrderSection routes={routes} />}
+      <HorizontalListSection variant="feedback" />
+      <HorizontalListSection variant="services" />
+      <ContactSection />
+      <CallBackButton />
+      <TheFooter />
+      <CookieNotification />
     </main>
   );
 }

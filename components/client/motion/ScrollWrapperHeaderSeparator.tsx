@@ -13,7 +13,8 @@ const ScrollWrapperHeaderSeparator:FC<Props> = ({children}) => {
     return (
       <motion.div
         style={{ 
-          opacity
+          opacity,
+          zIndex:12
         }}
       >
             {children}

@@ -1,0 +1,60 @@
+.container {
+    min-height: 480px;
+    width: 100dvw;
+    padding-top: 98px;
+    padding-bottom: 142px;
+    &>h2 {
+        width: 100%;
+        text-align: center;
+        font-size: 50px;
+        font-family: var(--font-header);
+        margin-bottom: 68px;
+    }
+    .items {
+        display: flex;
+        gap: 34px;
+        justify-content: center;
+    }
+}
+
+
+/* Media queries for smaller breakpoints */
+
+@media (min-width: 1025px) {
+    /* xl breakpoint */
+}
+
+@media (max-width: 1024px) {
+    /* lg breakpoint */
+}
+
+@media (max-width: 768px) {
+    /* md breakpoint */
+    .container {
+        padding-bottom: 0;
+        &>h2 {
+            font-size: 36px;
+            line-height: 26px;
+        }
+    }
+    .items {
+        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 480px) {
+    /* sm breakpoint */
+    .container {
+        padding-bottom: 0;
+        &>h2 {
+            font-size: 26px;
+            line-height: 24px;
+        }
+    }
+    .items {
+        flex-direction: column;
+        align-items: center;
+    }
+}

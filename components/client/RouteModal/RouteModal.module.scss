@@ -1,0 +1,210 @@
+.action_button {
+    border: 2px solid white;
+    border-radius: 30px;
+    padding: 15px 42px;
+    font-size: 14px;
+    font-family: var(--font-header);
+    text-transform: uppercase;
+    &:hover {
+        border: 2px solid #0294CD;
+        color: #0294CD;
+    }
+    .actions>& {
+        .description_container>&:hover {
+            border: 2px solid #0294CD;
+        }
+    }
+}
+
+.modal_container {
+    color: black;
+}
+
+.modal_content {
+    display: flex;
+    max-width: min(1120px, 90%);
+    height: 90dvh;
+}
+
+.image_container {
+    width: 50%;
+    position: relative;
+    top: 0;
+    overflow: hidden;
+    &>div {
+        width: 90%;
+    }
+}
+
+.image_box {
+    width: 480px;
+    overflow: hidden;
+    height: 420px;
+}
+
+.description_container {
+    position: relative;
+    height: 100%;
+    width: 50%;
+    overflow-y: auto;
+    padding-left: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 40px;
+    &>.description_header {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 16px;
+        &>h3 {
+            text-align: start;
+            font-size: 18px;
+            font-family: var(--font-header);
+        }
+        .summary {
+            text-transform: uppercase;
+            font-size: 16px;
+            font-family: var(--font-content);
+        }
+    }
+}
+
+.actions {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background-color: white;
+    &>.action_button {
+        border: 2px solid black;
+    }
+}
+
+.text_block {
+    &>span {
+        padding-bottom: 4px;
+    }
+}
+
+.close_btn {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    padding: 14px;
+    opacity: .4;
+    &:hover {
+        opacity: 1;
+    }
+    &>svg {
+        width: 48px;
+        height: 48px;
+    }
+}
+
+
+/* Media queries for smaller breakpoints */
+
+@media (max-width: 1024px) {
+    /* xl breakpoint */
+}
+
+@media (max-width: 1024px) {
+    /* lg breakpoint */
+    .image_container,
+    .description_container {
+        width: 100%;
+        padding-left: 16px;
+    }
+    .image_container {
+        order: 2;
+        min-height: 600px;
+        // display: none;
+    }
+    .modal_container {
+        height: auto;
+        overflow-y: auto;
+    }
+    .modal_content {
+        flex-direction: column;
+        padding: 24px;
+        height: 100dvh;
+        width: 100dvw;
+    }
+    .image_box {
+        width: 100%;
+        height: 400px;
+        /* Высота изображения на мобильных устройствах */
+    }
+    .description_container {
+        padding: 0 16px;
+        overflow: clip;
+        height: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .image_container,
+    .description_container {
+        width: 100%;
+        padding-left: 16px;
+    }
+    .image_container {
+        order: 2;
+        min-height: 400px;
+        // display: none;
+    }
+    .modal_container {
+        height: auto;
+        overflow-y: auto;
+    }
+    .modal_content {
+        flex-direction: column;
+        padding: 24px;
+        height: 100dvh;
+        width: 100dvw;
+    }
+    .image_box {
+        width: 100%;
+        height: 400px;
+        /* Высота изображения на мобильных устройствах */
+    }
+    .description_container {
+        padding: 0 16px;
+        overflow: clip;
+        height: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    /* sm breakpoint */
+    .image_container,
+    .description_container {
+        width: 100%;
+        padding-left: 16px;
+    }
+    .image_container {
+        order: 2;
+        display: none;
+    }
+    .modal_container {
+        height: 100dvh;
+        overflow-y: auto;
+    }
+    .modal_content {
+        flex-direction: column;
+        padding: 24px;
+        height: 100dvh;
+        width: 100dvw;
+    }
+    .image_box {
+        width: 100%;
+        height: 400px;
+        /* Высота изображения на мобильных устройствах */
+    }
+    .description_container {
+        padding: 16px;
+        padding-top: 0;
+        // overflow: visible;
+    }
+}

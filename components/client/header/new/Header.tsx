@@ -1,43 +1,65 @@
 'use client'
 import styles from './Header.module.scss'
-import { useEffect, useState } from 'react';
-import { AnimatePresence } from 'framer-motion';
+import { FC, useEffect, useState } from 'react';
+import { AnimatePresence, useMotionValueEvent, useScroll } from 'framer-motion';
 import { useParams } from 'next/navigation';
 import { Nav } from './nav';
 import Image from 'next/image';
 import { Image as TImage } from '../../../../types/webSiteContentTypes';
+import { DesktopNavWrapper } from './components';
+import Link from 'next/link';
 
-const HeaderGlobal = ({ logo }: { logo: { data: TImage } }) => {
+interface IHeaderProps {
+  children: [JSX.Element, JSX.Element],
+  logo: { data: TImage },
+  scrollY: number,
+  logoEl?: typeof Image
+}
+const HeaderGlobal: FC<IHeaderProps> = ({ logo, logoEl, scrollY: defaultScroll, children }) => {
 
+  const { scrollY } = useScroll();
   const [isActive, setIsActive] = useState(false);
   const params = useParams();
+  const [isShrink, setIsShrink] = useState<boolean>(false)
 
   useEffect(() => {
     console.log("Hash2:", window?.location?.hash, JSON.stringify(isActive));
-    if(isActive) setIsActive(false)
-  }, [params, ]);
-  
-  const {API_URL='http://localhost:1337'} = process.env
+    if (isActive) setIsActive(false)
+  }, [params,]);
+
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    setIsShrink(latest > defaultScroll);
+  })
+
   return (
     <>
-      <div className={styles.main}>
-        <div className={styles.header}>
-          <Image
-            src={API_URL + (logo.data.attributes.formats.small.url || "")}
-            alt={logo.data.attributes.alternativeText || ""}
-            className={styles.image}
-            width="120"
-            height="80"
-          />
-          <div onClick={() => {setIsActive(!isActive)}} className={styles.button}>
-            <div className={`${styles.burger} ${isActive ? styles.burgerActive : ""}`}></div>
-          </div>
+      <div className={`${styles.header} ${isShrink ? styles.shrinked : ""}`}>
+        <AnimatePresence mode="wait" initial={false}>
+          <Link href='/'>
+            {
+              !isShrink ? 
+                children[0] :
+                  <span className={''}>
+                    Магия Севера
+                  </span>
+            }
+          </Link>
+          <DesktopNavWrapper>
+            {children[1]}
+          </DesktopNavWrapper>
+          {
+            isShrink && <Link href={'/#new-order'}><button type='button' className={`${styles.action_button}`}>бронировать</button></Link>
+          }
+        </AnimatePresence>
+        <div onClick={() => { setIsActive(!isActive) }} className={styles.button}>
+          <div className={`${styles.burger} ${isActive ? styles.burgerActive : ""}`}></div>
         </div>
       </div>
       <AnimatePresence mode="wait">
-        {isActive && <Nav/>}
+        {isActive && <Nav />}
       </AnimatePresence>
     </>
   )
 }
-export {HeaderGlobal}
+export { HeaderGlobal }

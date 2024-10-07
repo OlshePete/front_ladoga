@@ -17,7 +17,7 @@ const navItems = [
   },
   {
     title: "Маршруты",
-    href: "#routes-list",
+    href: "#top-routes",
   },
   {
     title: "Бронирование",

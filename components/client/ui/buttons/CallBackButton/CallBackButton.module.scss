@@ -1,0 +1,40 @@
+.button {
+    z-index: 12;
+    position: fixed;
+    top: calc(100dvh - 94px);
+    left: calc(100dvw - 116px);
+    border-radius: 50%;
+    background-color: #0294CD;
+    color: white;
+    width: 52px;
+    height: 52px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    &>svg {
+        width: 24px;
+        height: 24px;
+        animation: pulse 2.5s infinite;
+    }
+}
+
+.button:hover {
+    animation: pulse 1s infinite;
+    &>svg {
+        animation: none;
+    }
+    // animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}

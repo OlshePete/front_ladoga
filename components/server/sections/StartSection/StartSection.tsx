@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FC } from "react";
+import { FC, Suspense } from "react";
 import {
   StartSectionData,
   Response,
@@ -9,10 +9,7 @@ import { ScrollWrapperHeaderSeparator } from "../../../client/motion/ScrollWrapp
 import { ScrollWrapperStartSection } from "../../../client/motion/ScrollWrapperStartSection";
 import styles from "./StartSection.module.scss";
 
-
-
 const StartSection = ({ content }: { content: Response<StartSectionData> }) => {
-  const API_URL = process.env.API_URL;
   const { title, background, sub_title } = content.data.attributes;
 
   const Arrow: FC = () => (<svg width="40px" height="40px" viewBox="0 -4.5 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -26,20 +23,34 @@ const StartSection = ({ content }: { content: Response<StartSectionData> }) => {
   </svg>)
 
   return (
-    <section className={`${styles.container} section`} id='intro'>
+    <>
+      <section className={`${styles.container} section`} id='intro'>
+      <Suspense fallback={<div className="flex items-center justify-center"><h1>Fallback suspense</h1></div>}>
+        <video src={require('../../../../videos/intro_video_cutted.mp4')} autoPlay muted loop style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100vw',
+          height: '100vh',
+          objectFit: 'cover',
+          zIndex: 0,
+        }}
+          playsInline
+        />
+      </Suspense>
+        <div className="absolute bg-[rgba(0,0,0,0.5)] z-[1] h-[100dvh] w-[100dvw]"></div>
 
-      <div className={styles.title_container}>
-        <ScrollWrapperStartSection>
-          <div className="flex flex-col gap-2 items-center">
-            <h1 className={`${styles.title} sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl `}>{title}</h1>
-            {sub_title && <h2 className={`${styles.sub_title} sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl `}>{sub_title}</h2>}
+        <div className={styles.title_container}>
+          <ScrollWrapperStartSection>
+            <div className="flex flex-col gap-2 items-center">
+              <h1 className={`${styles.title}  uppercase`}>{"Магия севера" ?? title}</h1>
+              {true && <h2 className={`${styles.sub_title}  `}>{"путешествия по  Ладожскому озеру" ?? sub_title}</h2>}
+              {true && <h2 className={`${styles.sub_title}  `}>{"город Сортавала" ?? sub_title}</h2>}
 
-          </div>
-        </ScrollWrapperStartSection>
-
-        {/* <Link href={'#new-order'} className={`${styles.button} btn rounded border-white hover:border-[] px-12 h-[50px] flex items-center justify-center `}>Бронировать</Link> */}
-      </div>
-      <Image
+            </div>
+          </ScrollWrapperStartSection>
+        </div>
+        {/* <Image
         src={API_URL + (background.data.attributes.url || "")}
         alt={background.data.attributes.alternativeText || ""}
         className={styles.image}
@@ -52,14 +63,14 @@ const StartSection = ({ content }: { content: Response<StartSectionData> }) => {
       //   objectFit: "cover",
       // }}
       // quality={100}
-      />
-
-      <ScrollWrapperHeaderSeparator>
-        <Link href="#about" style={{ zIndex: 12 }} className={styles.shake} >
-          <Arrow />
-        </Link>
-      </ScrollWrapperHeaderSeparator>
-    </section>
+      /> */}
+        <ScrollWrapperHeaderSeparator>
+          <Link href="#about" className={styles.shake} >
+            <Arrow />
+          </Link>
+        </ScrollWrapperHeaderSeparator>
+      </section>
+    </>
   );
 };
 

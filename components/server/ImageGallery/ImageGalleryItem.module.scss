@@ -1,0 +1,82 @@
+.image {
+    object-fit: cover;
+    z-index: 1;
+    // width: min(100%, 550px);
+    height: 100%;
+    // position: absolute;
+    // top: 0;
+    // left: 0;
+}
+
+.prev_icon {
+    z-index: 3;
+    position: absolute;
+    left: 0;
+    top: calc(50% - 47px);
+    width: 94px;
+    height: 94px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &>svg {
+        // width: 21px;
+        // height: 42px;
+        transform: scale(2, 3);
+        fill: white
+    }
+    &:hover>svg {
+        fill: lightgray
+    }
+}
+
+.next_icon {
+    z-index: 3;
+    position: absolute;
+    right: 0;
+    top: calc(50% - 47px);
+    width: 94px;
+    height: 94px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &>svg {
+        // width: 21px;
+        // height: 42px;
+        transform: scale(2, 3);
+        fill: white
+    }
+    &:hover>svg {
+        fill: lightgray
+    }
+}
+
+
+/* Media queries for smaller breakpoints */
+
+@media (min-width: 1025px) {
+    /* xl breakpoint */
+}
+
+@media (max-width: 1024px) {
+    /* lg breakpoint */
+    .prev_icon,
+    .next_icon {
+        width: 78px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* md breakpoint */
+    .prev_icon,
+    .next_icon {
+        width: 56px;
+    }
+}
+
+@media (max-width: 480px) {
+    /* sm breakpoint */
+    .prev_icon,
+    .next_icon {
+        width: 48px;
+    }
+}

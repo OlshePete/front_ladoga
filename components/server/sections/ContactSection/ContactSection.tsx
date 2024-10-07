@@ -1,11 +1,14 @@
-import Image from "next/image";
 import { ContactInfoData, Image as IImage, Response, Video } from "../../../../types/webSiteContentTypes";
 import { formatPhone } from "../../../utils/formatPhone";
 import styles from "./ContactSection.module.scss";
-import { BlocksRenderer } from '@strapi/blocks-react-renderer';
-import VideoSection from "../VideoSection/VideoSection";
 import YandexMapLink from "../../buttons/YandexMapLink/YandexMapLink";
-const ContactSection = ({contactContent, videoData}:{contactContent:Response<ContactInfoData>, videoData:Response<Video> | undefined}) => {
+import { wrappedGetContacts } from "../../../../services/getWebSiteContent";
+interface IProps {
+
+}
+const ContactSection:React.FC<IProps> = async ({}) => {
+  const contactContent = await wrappedGetContacts()
+ if(!contactContent) return <></>
   const {title,content,summary,address, phone_number } = contactContent.data.attributes
     return (
       <section  className={`${styles.container} section flex flex-wrap sm:flex-col md:flex-row items-center justify-center`} id="contacts"> 

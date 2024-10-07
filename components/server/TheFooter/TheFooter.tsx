@@ -9,7 +9,7 @@ const TheFooter = () => {
     <Link href={'#intro'} className="link link-hover">В начало</Link>
     <Link href={'#routes-list'} className="link link-hover">Маршруты</Link>
     <Link href={'#new-order'} className="link link-hover">Бронирование</Link>
-    <Link href={'/policy'} className="link link-hover">Политика конфиденциальности</Link>
+    <Link href={'/privacy-policy'} className="link link-hover">Политика конфиденциальности</Link>
   </nav>
   <nav>
     <div className="grid grid-flow-col gap-4 *:cursor-pointer ">

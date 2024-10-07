@@ -5,7 +5,39 @@
     gap: 2rem;
     width: 100%;
     min-height: 100vh;
-    background-color: rgb(21, 19, 17);
+    background-color: #D8DBD7;
     padding: 4rem 0;
     z-index: 5;
+}
+
+.section_title {
+    font-family: var(--font-header);
+    font-size: 50px;
+}
+
+
+/* Media queries for smaller breakpoints */
+
+@media (min-width: 1025px) {
+    /* xl breakpoint */
+}
+
+@media (max-width: 1024px) {
+    /* lg breakpoint */
+}
+
+@media (max-width: 768px) {
+    /* md breakpoint */
+    .section_title {
+        font-size: 36px;
+        line-height: 26px;
+    }
+}
+
+@media (max-width: 480px) {
+    /* sm breakpoint */
+    .section_title {
+        font-size: 26px;
+        line-height: 24px;
+    }
 }

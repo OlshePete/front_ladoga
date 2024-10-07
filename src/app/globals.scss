@@ -5,3 +5,12 @@ body {
     scroll-behavior: smooth;
     overflow-x: hidden;
 }
+
+a:focus-visible,
+button:focus-visible {
+    outline: 1px solid #0294cd;
+}
+
+button:focus-visible {
+    border-color: #0294cd;
+}

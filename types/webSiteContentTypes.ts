@@ -130,6 +130,30 @@ export type ImageFormat = {
     }
 
   }
+  export type ServicesInfoData = TService[]
+  export type TService = {
+    id:number; 
+    attributes:{
+      name: string;
+      image: {
+        data:Image
+      }
+    }
+  }
+  export type FeedbacksInfoData = TFeedback[]
+  export type TFeedback = {
+    id:number; 
+    attributes:{
+      name: string;
+      text: string;
+      image: {
+        data:Image
+      };
+      avatar: {
+        data:Image
+      }
+    }
+  }
 
   export type Response<T> = {
     data: T;

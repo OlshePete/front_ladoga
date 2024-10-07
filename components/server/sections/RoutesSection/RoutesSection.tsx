@@ -7,7 +7,7 @@ import styles from "./RoutesSection.module.scss";
 const RoutesSection = ({ routes }: { routes: Response<RouteSectionData[]> }) => {
   const API_URL = process.env.API_URL
   // routes.data.forEach(console.log)
-  // console.log(routes)
+  console.log(API_URL)
   return (
     <section className={`${styles.container} section`} id={'top-routes'}>
       {
@@ -19,9 +19,12 @@ const RoutesSection = ({ routes }: { routes: Response<RouteSectionData[]> }) => 
                 {images.data[1] ? <Image
                   src={API_URL + images.data[1].attributes.formats.small.url}
                   alt={`Product gallery ${images.data[1].id}`}
-                  className={`${styles.image} border`}
-                  width="300"
-                  height="300"
+                  className={`${styles.image}`}        
+                  fill={true}
+                  // sizes="100vw"
+                  // placeholder="blur"
+                  // blurDataURL={background.data.attributes.formats.small.url}
+                  priority
                 /> : <div style={{ height: '300px' }} />}
 
                   <TextWrapper containerClass={`${styles.content}`}>

@@ -5,12 +5,14 @@
 }
 
 .main {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     min-height: 100dvh;
     max-width: 100dvw;
-    background-color: #151311;
+    // background-color: #151311;
+    background-color: rgba(216, 219, 215, 1);
     overflow-x: hidden;
 }

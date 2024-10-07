@@ -1,0 +1,126 @@
+.title {
+    font-family: var(--font-header);
+    font-size: 2rem;
+    color: black;
+}
+
+.route_name {
+    font-family: var(--font-content);
+    font-size: 15px;
+    color: rgba(35, 36, 35, .5);
+    text-transform: uppercase;
+}
+
+.route_price {
+    font-family: var(--font-content);
+    font-size: 15px;
+    color: rgba(35, 36, 35, .5);
+}
+
+.container {
+    font-family: var(--font-content);
+    font-size: 1.4rem;
+    border-radius: 8px;
+    background-color: whitesmoke;
+    width: min(100dvw, 1200px);
+    & form {
+        padding: 0;
+    }
+}
+
+.error,
+.error * {
+    border-color: darkred;
+    color: red
+}
+
+// 1 step
+.route_list_item {
+    width: fit-content!important;
+    & .route_name {
+        font-weight: 700;
+    }
+    &.active_item {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        & .route_name {
+            font-weight: 700;
+            color: black;
+        }
+    }
+}
+
+.check_icon {
+    background: white;
+    border-radius: 100%;
+    position: absolute;
+    top: -4%;
+    left: -4%;
+    &>svg {
+        color: #0294CD;
+    }
+}
+
+// 2 step
+.form_input {
+    &>*:focus-visible {
+        outline: none;
+        border-bottom: 2px solid #0294CD;
+    }
+    &>textarea:focus-visible {
+        outline: none;
+        border: 2px solid #0294CD;
+    }
+}
+
+//4 step
+.confirmation {
+    min-width: 100%;
+    justify-content: space-between;
+}
+
+.left_block {
+    display: flex;
+    flex-direction: column;
+    gap: '22px'
+}
+
+.right_block {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    span {
+        font-size: 28px;
+    }
+    .label {
+        color: rgba(35, 36, 35, .5);
+        font-size: 20px;
+    }
+}
+
+
+/* Media queries for smaller breakpoints */
+
+@media (max-width: 1024px) {
+    /* lg breakpoint */
+}
+
+@media (max-width: 768px) {
+    /* md breakpoint */
+    .title {
+        font-size: large;
+    }
+}
+
+@media (max-width: 480px) {
+    /* sm breakpoint */
+    .title {
+        font-size: medium;
+    }
+}

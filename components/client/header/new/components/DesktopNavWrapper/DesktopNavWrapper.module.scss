@@ -1,0 +1,44 @@
+.nav_container {
+    color: #FFFFFF;
+    // flex-grow: 1;
+    ul {
+        // margin-right: 120px;
+        gap: 33px;
+        width: 500px;
+        li {
+            opacity: .67;
+            text-align: center;
+        }
+        li:hover {
+            opacity: 1;
+        }
+    }
+}
+
+
+/* Media queries for smaller breakpoints */
+
+@media (min-width: 1025px) {
+    /* xl breakpoint */
+}
+
+@media (max-width: 1024px) {
+    /* lg breakpoint */
+    .nav_container {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    /* md breakpoint */
+    .nav_container {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    /* sm breakpoint */
+    .nav_container {
+        display: none;
+    }
+}

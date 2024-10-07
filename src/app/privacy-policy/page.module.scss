@@ -1,0 +1,110 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 100dvh;
+    max-width: 100dvw;
+    min-width: 100dvw;
+    background-color: #D8DBD7;
+    overflow-x: hidden;
+    .content {
+        max-width: 1200px;
+        margin: 120px auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 32px;
+        h1 {
+            font-size: 50px;
+            font-family: var(--font-header);
+            text-align: center;
+            max-width: 100dvw;
+        }
+        .block {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            gap: 24px;
+            .block_header {
+                font-size: 20px;
+                font-family: var(--font-content);
+                font-weight: 700;
+            }
+            .block_text {
+                font-size: 14px;
+                font-family: var(--font-content);
+                font-weight: 400;
+                & a {
+                    color: rgb(37, 99, 235);
+                    &:hover {
+                        color: rgb(30, 58, 138)
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+/* Media queries for smaller breakpoints */
+
+@media (min-width: 1301px) {
+    /* xl breakpoint */
+    .main {
+        padding: 0;
+        outline: 1px solid green;
+    }
+}
+
+@media (max-width: 1300px) {
+    /* xl breakpoint */
+    .main {
+        padding: 0 100px;
+        outline: 1px solid green;
+        font-size: 50px;
+    }
+}
+
+@media (max-width: 1024px) {
+    /* lg breakpoint */
+    .main {
+        padding: 0 65px;
+        outline: 1px solid red;
+        font-size: 36px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* md breakpoint */
+    .main {
+        padding: 0 36px;
+        outline: 1px solid blue;
+        .content {
+            h1 {
+                text-align: left;
+                width: 100%;
+                font-size: 28px;
+            }
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    /* sm breakpoint */
+    .main {
+        padding: 0 18px;
+        outline: 1px solid purple;
+        .content {
+            h1 {
+                text-align: left;
+                width: 100%;
+                font-size: 24px;
+            }
+            .block {
+                .block_header {}
+                .block_text {}
+            }
+        }
+    }
+}
