@@ -26,7 +26,7 @@ const StartSection = ({ content }: { content: Response<StartSectionData> }) => {
     <>
       <section className={`${styles.container} section`} id='intro'>
       <Suspense fallback={<div className="flex items-center justify-center"><h1>Fallback suspense</h1></div>}>
-        <video src={require('../../../../videos/intro_video_cutted.mp4')} autoPlay muted loop style={{
+        <video src={require('public/intro_video_cutted.mp4')} autoPlay muted loop style={{
           position: 'absolute',
           top: 0,
           left: 0,
