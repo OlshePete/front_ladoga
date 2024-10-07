@@ -8,6 +8,7 @@ const FormComplete:FC<{formComplete:IOrderResponse, setFormComplete:()=>void}> =
     return (
     <div className='h-[80dvh] flex flex-col items-center justify-center gap-10 py-10'>
         <h3 className='text-center'> Ваш заказ №{order.data.id} успешно оформлен!</h3>
+        <span>В ближайшее время с Вами свяжется наш менеджер и уточнит детали. </span>
         <div>
         <BiCheckCircle size={64} color={'green'}/>
         </div>

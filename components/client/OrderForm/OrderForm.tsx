@@ -1,24 +1,25 @@
 "use client";
 import "react-phone-input-2/lib/style.css";
-import { AddOrder } from './components/form-action'
 import { Field, Form, Formik, FormikErrors, FormikHelpers } from "formik";
 import React, { ChangeEvent, FC, useState } from "react";
 import styles from "./OrderForm.module.scss";
 import PhoneInput from "react-phone-input-2";
-import { IOrder, Response, RouteSectionData } from "../../../types/webSiteContentTypes";
+import { Response, RouteSectionData } from "../../../types/webSiteContentTypes";
 import { formatDate } from "../../utils/formatDate";
 import Stepper from "./components/Stepper";
 import { formatDateToRender } from "../../utils/formatDateToRender";
 import { FormComplete } from "./components/FormComplete";
 import { IOrderResponse } from "../../../services/orders";
 import Image from "next/image";
-import Slider,{Settings} from "react-slick";
+import Slider, { Settings } from "react-slick";
 import { IoCheckmarkCircleSharp } from "react-icons/io5";
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { formatPhone } from "../../utils/formatPhone";
 import { getTimeInHour } from "../../utils/getTimeInHour";
+import { FormError } from "./components/FormError";
+import { AddOrder } from "./components/form-action";
 interface Props {
   routes: Response<RouteSectionData[]>
 }
@@ -54,87 +55,88 @@ const OrderForm: FC<Props> = ({ routes }) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [completeStepper, setCompleteStepper] = useState(false);
   const [formComplete, setFormComplete] = useState<IOrderResponse | null>(null)
+  const [error, setError] = useState<boolean>(false)
   const renderStep = (activeIndex: number, values: IFromData, setFieldValue: (field: string, value: any, shouldValidate?: boolean | undefined) => any, errors: FormikErrors<IFromData>) => {
 
     const currentRoute = routes.data.find(r => r.id === +values.route.route_id)
 
-    const settings:Settings = {
+    const settings: Settings = {
       infinite: false,
       slidesToShow: 4,
       slidesToScroll: 1,
       speed: 500,
-      arrows:true,
+      arrows: true,
       className: "slider variable-width",
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: true
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 3,
+            infinite: true,
+            dots: true
+          }
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2,
+            initialSlide: 2
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
         }
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2
-        }
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1
-        }
-      }
-    ]
+      ]
     };
     switch (activeIndex) {
       case 1:
         return (<div key={`form-order-${activeIndex}-${steps[activeIndex - 1]}`} className="pt-20 pb-10 flex-grow gap-12 min-w-[100%] h-[350px] carousel carousel-center overflow-visible">
-        <Slider {...settings}
-        // @ts-ignore
-      style={{
-        zIndex: 3,
-        width: '100%',
-        height: '350px',
+          <Slider {...settings}
+            // @ts-ignore
+            style={{
+              zIndex: 3,
+              width: '100%',
+              height: '350px',
 
-      }}>
-          {
-            routes && routes?.data && routes?.data.map((route) => {
-              const image = route.attributes.images.data[0]
-              const isActive = values.route.route_id === route.id
-              const isExtraRoute = route.attributes.name.trim().toLowerCase().includes('свой маршрут')
-              return (
-                <div 
-                  className={`${styles.route_list_item} ${isActive?styles.active_item:''} cursor-pointer border relative m-2`} 
-                  key={route.attributes.name + "-" + route.id}
-                  onClick={() => setFieldValue('route.route_id', +route.id)}
-                >
-                  <Image
-                    src={API_URL + image.attributes.formats.small.url}
-                    alt={`Route image ${image.id}`}
-                    fill={false}
-                    height={213}
-                    width={213}
-                    style={{
-                      minWidth: '213px',
-                      height: '213px',
-                      objectFit: 'cover',
-                    }}
-                  />
-                  {isActive && <div className={styles.check_icon}><IoCheckmarkCircleSharp /></div>}
-                  <div className={`${styles.route_info} flex flex-col`}> 
-                    <span className={`${styles.route_name} label-text  text-nowrap text-accent`}>{route.attributes.name.trim()}</span>
-                    <span className={`${styles.route_price} label-text  `}>Длительность{isExtraRoute?" от":""}: {getTimeInHour(route.attributes.duration)}</span>
-                    <span className={`${styles.route_price} label-text  `}>Цена с человека{isExtraRoute?" от":""}: {route.attributes.price} руб.</span>
-                  </div>
-                </div>)
-            })
-          }
+            }}>
+            {
+              routes && routes?.data && routes?.data.map((route) => {
+                const image = route.attributes.images.data[0]
+                const isActive = values.route.route_id === route.id
+                const isExtraRoute = route.attributes.name.trim().toLowerCase().includes('свой маршрут')
+                return (
+                  <div
+                    className={`${styles.route_list_item} ${isActive ? styles.active_item : ''} cursor-pointer border relative m-2`}
+                    key={route.attributes.name + "-" + route.id}
+                    onClick={() => setFieldValue('route.route_id', +route.id)}
+                  >
+                    <Image
+                      src={API_URL + image.attributes.formats.small.url}
+                      alt={`Route image ${image.id}`}
+                      fill={false}
+                      height={213}
+                      width={213}
+                      style={{
+                        minWidth: '213px',
+                        height: '213px',
+                        objectFit: 'cover',
+                      }}
+                    />
+                    {isActive && <div className={styles.check_icon}><IoCheckmarkCircleSharp /></div>}
+                    <div className={`${styles.route_info} flex flex-col`}>
+                      <span className={`${styles.route_name} label-text  text-nowrap text-accent`}>{route.attributes.name.trim()}</span>
+                      <span className={`${styles.route_price} label-text  `}>Длительность{isExtraRoute ? " от" : ""}: {getTimeInHour(route.attributes.duration)}</span>
+                      <span className={`${styles.route_price} label-text  `}>Цена с человека{isExtraRoute ? " от" : ""}: {route.attributes.price} руб.</span>
+                    </div>
+                  </div>)
+              })
+            }
           </Slider>
         </div>)
 
@@ -182,7 +184,7 @@ const OrderForm: FC<Props> = ({ routes }) => {
       case 3:
         return (<div
           key={`form-order-${activeIndex}-${steps[activeIndex - 1]}`}
-          className=" min-w-[100%] flex flex-col gap-[32px] xs:flex-col sm:flex-col md:flex-row xs:gap-2 sm:gap-4 md:gap-8 justify-between px-[126px] "
+          className={`${styles.user_info_block} min-w-[100%] flex flex-col gap-[32px] xs:flex-col sm:flex-col md:flex-row xs:gap-2 sm:gap-4 md:gap-8 justify-between `}
         >
           <div className={`${styles.form_input} flex flex-col gap-2 w-[300px] justify-center ${errors.user?.name ? styles.error : ""}`}>
             <label htmlFor="user.name" className="text-xs ">{errors.user?.name ? `${errors.user?.name}` : `Ваше имя`}</label>
@@ -244,7 +246,7 @@ const OrderForm: FC<Props> = ({ routes }) => {
                 }
                 return true;
               }}
-              
+
             />
 
             <label htmlFor="user.email" className="text-xs ">Почта (необязательно)</label>
@@ -271,34 +273,34 @@ const OrderForm: FC<Props> = ({ routes }) => {
           <div className={`${styles.left_block} w-[50%]`}>
             <div className={styles.item}>
               <span className={styles.label} id=""> Маршрут</span>
-              <span className="text-nowrap" style={{fontSize:'36px'}}>{name} </span>
+              <span className="text-nowrap" style={{ fontSize: '36px' }}>{name} </span>
             </div>
-          
+
             <div className={styles.item}>
               <span className={styles.label} id=""> Отправление</span>
-              <span className="text-nowrap flex justify-between">{formatDateToRender(new Date(values.route.date))} {time ? String('- ' + time.slice(0, 5)) : ""}
+              <span className={`${styles.date_time} text-nowrap flex justify-between`}>{formatDateToRender(new Date(values.route.date))}<br className={styles.brake}/> {time ? String('- ' + time.slice(0, 5)) : ""}
                 <span className="pl-2">
-                {values.route.count} чел.
+                  {values.route.count} чел.
                 </span>
               </span>
             </div>
 
-        {values.user.comment &&   <div className={`${styles.item} max-w-[760px]`}>
+            {values.user.comment && <div className={`${styles.item} max-w-[760px]`}>
               <span className={styles.label} id=""> Комментарий</span>
               <span className="">{values.user.comment} </span>
             </div>}
           </div>
 
-          <div className={styles.right_block  } >
-          <div className={styles.item}>
+          <div className={styles.right_block} >
+            <div className={styles.item}>
               <span className={styles.label} id=""> Заказчик</span>
               <span className="text-nowrap">{values.user.name} </span>
-              <span className="text-nowrap" style={{color: 'rgba(35, 36, 35, .5)'}}>{formatPhone(values.user.phone.slice(-10))} </span>
-          </div>
-          <div className={styles.item}>
+              <span className="text-nowrap" style={{ color: 'rgba(35, 36, 35, .5)' }}>{formatPhone(values.user.phone.slice(-10))} </span>
+            </div>
+            <div className={styles.item}>
               <span className={styles.label} id=""> Cумма</span>
-              <span className="text-nowrap" style={{fontSize:'36px'}}>{(currentRoute?.attributes.price ?? 1) * values.route.count} </span>
-          </div>
+              <span className="text-nowrap" style={{ fontSize: '36px' }}>{(currentRoute?.attributes.price ?? 1) * values.route.count} </span>
+            </div>
           </div>
         </div>)
 
@@ -314,170 +316,143 @@ const OrderForm: FC<Props> = ({ routes }) => {
       ease-in-out 
       min-h-[100%]
     `}>
-      {/* <h1 className={`${styles.title} text-center xs:text-center sm:text-center  md:text-center lg:text-left lg:pl-40 `}>Бронировать место</h1> */}
-      {formComplete ? <FormComplete formComplete={formComplete} setFormComplete={() => setFormComplete(null)} /> : <Formik
-        initialValues={{
-          user: {
-            name: "",
-            email: "",
-            phone: "",
-            comment: "",
-          },
-          route: {
-            route_id: 1,
-            departure_id: '1',
-            date: nowDate,
-            count: 0,
-          }
-        }}
-        onSubmit={async (
-          values: IFromData,
-          { setSubmitting, resetForm }: FormikHelpers<IFromData>
-        ) => {
-          // const currentDeparture = departures?.data[values.route.departure_id]
-          try {
-            console.log(values)
-            alert(JSON.stringify(values))
-            const res:IOrderResponse = {
-              data:{
-                id:9,
-                //@ts-ignore
-                attributes:{
-                  count:values.route.count,
-                  in_procces:false,
-                  comment:values.user.comment,
-                  createdAt:String(new Date().toISOString()),
-                  updatedAt:String(new Date().toISOString()),
-                  date:values.route.date,
-                  client:{
-                    data:{
-                      id:1,
-                      attributes:{
-                        name:values.user.name,
-                        createdAt:String(new Date().toISOString()),
-                        updatedAt:String(new Date().toISOString()),
-                        phone:values.user.phone
-                      }
-
-                    }
-                  }
-
-                }
-              },
-              meta:{}
+      {formComplete ?
+        <FormComplete formComplete={formComplete} setFormComplete={() => setFormComplete(null)} /> :
+        <Formik
+          initialValues={{
+            user: {
+              name: "",
+              email: "",
+              phone: "",
+              comment: "",
+            },
+            route: {
+              route_id: 1,
+              departure_id: '1',
+              date: nowDate,
+              count: 0,
             }
-            // const res = await AddOrder(values);
-            if (res) {
+          }}
+          onSubmit={async (
+            values: IFromData,
+            { setSubmitting, resetForm }: FormikHelpers<IFromData>
+          ) => {
+            // const currentDeparture = departures?.data[values.route.departure_id]
+            try {
+              const res = await AddOrder(values);
+              if (res) {
+                setCurrentStep(1);
+                setCompleteStepper(false);
+                resetForm()
+                setFormComplete(res)
+              } else {
+                throw new Error(' ошибка данных')
+              }
+            } catch (error) {
+              console.log('Не удалось создать заказ', JSON.stringify(error));
+              setError(true)
+            }
+          }}
+        >
+          {(props) => {
+            const { values, setFieldValue, setFieldError, errors, submitForm, resetForm } = props
+            const validateStep = (activeIndex: number): boolean => {
+              let result = false
+              switch (activeIndex) {
+                case 1:
+                  if (routes.data.find(r => r.id === +values.route.route_id)) {
+                    return true;
+                  } else {
+                    setFieldError('route.route_id', 'Маршрут не выбраны')
+                    return false
+                  }
+                case 2:
+                  result = true
+                  if (values.route.count <= 0) {
+                    result = false
+                    setFieldError('route.count', 'Количество не может быть 0 или отрицательным')
+                  }
+                  if (new Date(values.route.date).valueOf() < new Date().valueOf()) {
+                    result = false
+                    setFieldError('route.date', 'Дата не может быть в прошлом')
+                  }
+                  // if (new Date(values.route.date).getHours()<new Date().getHours()) {
+                  // TODO validate departure time by current time
+
+                  // console.log(new Date(values.route.departure_id).getHours(),new Date().getHours());
+
+                  // setFieldError('route.date', 'Время для поездки не верное')
+                  // result =  false
+                  // break;
+                  // } 
+                  return result
+                case 3:
+                  if (values.user.name.length === 0) {
+                    result = false
+                    setFieldError('user.name', 'Обязательное поле')
+                    return result
+                  }
+                  if (values.user.name.length < 2) {
+                    result = false
+                    setFieldError('user.name', 'Имя слишком короткое')
+                    return result
+                  }
+                  if (values.user.name.length < 2) {
+                    result = false
+                    setFieldError('user.name', 'Имя слишком короткое')
+                    return result
+                  }
+                  if (values.user.phone.length < 11) {
+                    result = false
+                    setFieldError('user.phone', 'Номер не существует')
+                    return result
+                  }
+                  result = true
+                  return result
+                case 4:
+                  submitForm()
+                  return true
+                default:
+                  return result
+              }
+            }
+            if (error) return <FormError refreshError={() => {
+              setError(false)
               setCurrentStep(1);
               setCompleteStepper(false);
               resetForm()
-              setFormComplete(res)
-            } else {
-              throw new Error(' ошибка данных')
-            }
-          } catch (error) {
-            console.log('Не удалось создать заказ', JSON.stringify(error));
+            }} />
+            return (
+              <Form className=" flex flex-col gap-2 pt-6 sm:px-2 h-[fit-content]">
+                <div className="bg-transparent flex flex-col gap-2 h-[fit-content] min-w-[100%] items-center justify-center">
+                  <Stepper
+                    setComplete={setCompleteStepper}
+                    setCurrentStep={setCurrentStep}
+                    complete={completeStepper}
+                    currentStep={currentStep}
+                    steps={steps}
+                    validate={validateStep}
+                  >
+                    <div className={`px-10 w-[100%] min-h-[320px] flex justify-center ${styles.form_step}`}>
+                      {renderStep(currentStep, values, setFieldValue, errors)}
 
-          }
-        }}
-      >
-        {(props) => {
-          const { values, setFieldValue, setFieldError, errors, submitForm } = props
-          console.log(errors, values)
+                      {
+                        !firstStep && <div className="  flex flex-row justify-between w-[100%] h-[fit-content] ">
+                          <button
+                            type="submit"
+                            className="button border border-black w-[200px] rounded  h-12 mt-20 border border-black"
+                          >Оставить заявку</button>
+                        </div>
 
-          // console.log("7777", currentRoute?.attributes.departures.data);
-          const validateStep = (activeIndex: number): boolean => {
-            console.log('valid', activeIndex);
-            let result = false
-            switch (activeIndex) {
-              case 1:
-                if (routes.data.find(r => r.id === +values.route.route_id)) {
-                  return true;
-                } else {
-                  setFieldError('route.route_id', 'Маршрут не выбраны')
-                  return false
-                }
-              case 2:
-                result = true
-                if (values.route.count <= 0) {
-                  result = false
-                  setFieldError('route.count', 'Количество не может быть 0 или отрицательным')
-                }
-                if (new Date(values.route.date).valueOf() < new Date().valueOf()) {
-                  result = false
-                  setFieldError('route.date', 'Дата не может быть в прошлом')
-                }
-                // if (new Date(values.route.date).getHours()<new Date().getHours()) {
-                // TODO validate departure time by current time
+                      }
 
-                // console.log(new Date(values.route.departure_id).getHours(),new Date().getHours());
-
-                // setFieldError('route.date', 'Время для поездки не верное')
-                // result =  false
-                // break;
-                // } 
-                return result
-              case 3:
-                if (values.user.name.length === 0) {
-                  result = false
-                  setFieldError('user.name', 'Обязательное поле')
-                  return result
-                }
-                if (values.user.name.length < 2) {
-                  result = false
-                  setFieldError('user.name', 'Имя слишком короткое')
-                  return result
-                }
-                if (values.user.name.length < 2) {
-                  result = false
-                  setFieldError('user.name', 'Имя слишком короткое')
-                  return result
-                }
-                if (values.user.phone.length < 11) {
-                  result = false
-                  setFieldError('user.phone', 'Номер не существует')
-                  return result
-                }
-                result = true
-                return result
-              case 4:
-                submitForm()
-                return true
-              default:
-                return result
-            }
-          }
-          return (
-            <Form className=" flex flex-col gap-2 pt-6 sm:px-2 h-[fit-content]">
-              <div className="bg-transparent flex flex-col gap-2 h-[fit-content] min-w-[100%] items-center justify-center">
-                <Stepper
-                  setComplete={setCompleteStepper}
-                  setCurrentStep={setCurrentStep}
-                  complete={completeStepper}
-                  currentStep={currentStep}
-                  steps={steps}
-                  validate={validateStep}
-                >
-                  <div className={`px-10 w-[100%] min-h-[320px] flex justify-center ${styles.form_step}`}>
-                    {renderStep(currentStep, values, setFieldValue, errors)}
-
-                    {
-                      !firstStep && <div className="  flex flex-row justify-between w-[100%] h-[fit-content] ">
-                        <button
-                          type="submit"
-                          className="button border border-black w-[200px] rounded  h-12 mt-20 border border-black"
-                        >Оставить заявку</button>
-                      </div>
-
-                    }
-
-                  </div>
-                </Stepper>
-              </div>
-            </Form>
-          )
-        }}
-      </Formik>}
+                    </div>
+                  </Stepper>
+                </div>
+              </Form>
+            )
+          }}
+        </Formik>}
     </div>
   );
 }

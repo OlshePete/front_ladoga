@@ -35,7 +35,7 @@ const Stepper:FC<Props> = ({children, complete,currentStep,steps,setComplete,set
         </button>
       {!complete && (
         <button
-          className={`stepper-button hover:text-[#0294CD] z-[4]`}
+          className={`stepper-button hover:text-[#0294CD] z-[4] mt-4`}
           type="button"
           onClick={(e) => {
               e.stopPropagation()
