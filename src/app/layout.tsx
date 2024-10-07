@@ -6,11 +6,13 @@ const deltaGO = Dela_Gothic_One({
   subsets: ["cyrillic"],
   weight: "400",
   variable: "--font-header",
+  preload: false,
 });
 const openSans = Open_Sans({
   subsets: ["cyrillic"],
   weight: ["400", "300", "700"],
   variable: "--font-content",
+  preload: false,
 });
 
 export const metadata: Metadata = {
