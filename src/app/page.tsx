@@ -13,7 +13,7 @@ import TheHeader from "../../components/server/TheHeader";
 import CallBackButton from "../../components/client/ui/buttons/CallBackButton";
 import dynamic from "next/dynamic";
 
-// const AboutSection = dynamic(() => import('../../components/server/sections/AboutSection/AboutSection'))
+// const OrderSection = dynamic(() => import('../../components/server/sections/OrderSection/OrderSection'))
 const CookieNotification = dynamic(() => import('../../components/client/CookieNotification'), { ssr: false })
 
 export default async function Home() {

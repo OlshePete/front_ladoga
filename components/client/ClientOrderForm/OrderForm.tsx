@@ -14,12 +14,15 @@ import { IOrderResponse } from "../../../services/orders";
 interface Props {
   routes: Response<RouteSectionData[]>
 }
-interface UserData {
+
+export interface IUserData {
   name: string;
   email: string;
   phone: string;
   comment: string;
 }
+export interface INewUser extends Pick<IUserData, 'name' | 'phone' > {}
+
 interface RouteData {
   route_id: number;
   departure_id: string;
@@ -27,7 +30,7 @@ interface RouteData {
   count: number;
 }
 export interface IFromData {
-  user: UserData;
+  user: IUserData;
   route: RouteData;
 }
 
@@ -63,7 +66,6 @@ const OrderForm: FC<Props> = ({ routes }) => {
                   <label className="cursor-pointer label justify-start gap-4 w-[fit-content] flex-row-reverse">
                     <span className={`${styles.route_title} label-text  text-nowrap `}>{route.attributes.name.trim()}</span>
                     <input type="checkbox"
-
                       checked={values.route.route_id === route.id} className={`checkbox checkbox-success ${hiddenClass}`} onChange={() => setFieldValue('route.route_id', +route.id)} />
                   </label>
                 </div>)

@@ -40,7 +40,7 @@ const HeaderGlobal: FC<IHeaderProps> = ({ logo, logoEl, scrollY: defaultScroll, 
             {
               !isShrink ? 
                 children[0] :
-                  <span className={''}>
+                  <span className={''} style={{fontWeight:800}}>
                     Магия Севера
                   </span>
             }

@@ -40,7 +40,7 @@ export interface IFromData {
   route: RouteData;
 }
 
-interface ICountry extends Object {
+export interface ICountry extends Object {
   countryCode: string,
   format: string,
 }

@@ -1,6 +1,7 @@
-import { IFromData } from "../components/client/ClientOrderForm/OrderForm";
+import { IFromData, INewUser } from "../components/client/ClientOrderForm/OrderForm";
 import { IOrder, Response } from "../types/webSiteContentTypes";
 import { newOrderNotificationBot } from "./bot";
+import { wrappedAddClient } from "./clients";
 import { generateRequestBody, wrapRequest } from "./utils";
 
 const { API_TOKEN, API_URL } = process.env
@@ -74,6 +75,16 @@ export interface IOrderResponse extends Response<IOrder> {}
     return data;
   };
   
-  export const wrappedAddOrder = wrapRequest(addOrder);
-export const wrapperdGetAllOrders = wrapRequest(getAllorders);
-export const wrapperdGetordersBySearch = wrapRequest(getOrdersBySearch);
+  const addCustomer = async (props:INewUser) => {
+    const client = await wrappedAddClient({
+      data:{
+        name:props.name,
+        phone:props.phone
+      }
+    })
+    return client ?? {error:'Ошибка при добавлении клиента'}
+  }
+  export const wrappedAddOrder = wrapRequest(addOrder) as typeof addOrder;
+  export const wrappedAddCustomer = wrapRequest(addCustomer) as typeof addCustomer;
+export const wrapperdGetAllOrders = wrapRequest(getAllorders) as typeof getAllorders;
+export const wrapperdGetordersBySearch = wrapRequest(getOrdersBySearch) as typeof getOrdersBySearch;

@@ -1,8 +1,22 @@
-.button {
+.container {
     z-index: 12;
     position: fixed;
-    top: calc(100dvh - 94px);
+    bottom: 36px;
     left: calc(100dvw - 116px);
+}
+
+.dropdown {
+    position: absolute;
+    top: -160px;
+    right: 52px;
+    height: 160px;
+    overflow: hidden;
+    width: 360px;
+    // background: rgba(216, 219, 215, 1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.button {
     border-radius: 50%;
     background-color: #0294CD;
     color: white;
@@ -27,6 +41,32 @@
     // animation: pulse 1.5s infinite;
 }
 
+.submit_button {
+    width: fit-content;
+    height: 40px;
+    border-radius: 30px;
+    border: 2px solid rgba(2, 148, 205, 1);
+    background: rgba(2, 148, 205, 1);
+    color: rgba(255, 255, 255, 1);
+    font-family: var(--font-header);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20.27px;
+    text-align: left;
+    text-transform: uppercase;
+    padding: 0 20px;
+    &:hover {
+        border: 2px solid #0294cd;
+        color: rgba(2, 148, 205, 1);
+        background: rgba(255, 255, 255, 1);
+    }
+    &:disabled {
+        border: 2px solid grey;
+        color: grey;
+        background: rgba(255, 255, 255, 1);
+    }
+}
+
 @keyframes pulse {
     0% {
         transform: scale(1);
@@ -36,5 +76,36 @@
     }
     100% {
         transform: scale(1);
+    }
+}
+
+
+/* Media queries for smaller breakpoints */
+
+@media (min-width: 1025px) {
+    /* xl breakpoint */
+}
+
+@media (max-width: 1024px) {
+    /* lg breakpoint */
+}
+
+@media (max-width: 768px) {
+    /* md breakpoint */
+    .button {
+        top: calc(100dvh - 32px);
+        left: calc(100dvw - 32px);
+    }
+}
+
+@media (max-width: 480px) {
+    /* sm breakpoint */
+    .container {
+        top: calc(100dvh - 64px);
+        left: calc(100dvw - 64px);
+    }
+    .dropdown {
+        right: -12px;
+        width: 100dvw;
     }
 }
