@@ -7,6 +7,7 @@ import {
 import { ScrollWrapperHeaderSeparator } from "../../../client/motion/ScrollWrapperHeaderSeparator";
 import { ScrollWrapperStartSection } from "../../../client/motion/ScrollWrapperStartSection";
 import styles from "./StartSection.module.scss";
+import Image from "next/image";
 
 const StartSection = ({ content }: { content: Response<StartSectionData> }) => {
   const { title, background, sub_title } = content.data.attributes;
@@ -20,12 +21,24 @@ const StartSection = ({ content }: { content: Response<StartSectionData> }) => {
       </g>
     </g>
   </svg>)
-
+const API_URL = process.env.API_URL
+const videoSrc = `/intro_video_cutted.mp4`;
   return (
     <>
       <section className={`${styles.container} section`} id='intro'>
-      <Suspense fallback={<div className="flex items-center justify-center"><h1>Fallback suspense</h1></div>}>
-        <video src={require('public/intro_video_cutted.mp4')} autoPlay muted loop style={{
+      <Suspense fallback={<div className="flex items-center justify-center">
+        <Image
+          src={API_URL + (background.data.attributes.url || "")}
+          alt={background.data.attributes.alternativeText || ""}
+          className={styles.image}
+          fill={true}
+          sizes="100vw"
+          placeholder="blur"
+          blurDataURL={background.data.attributes.formats.small.url}
+          priority
+        /> 
+        </div>}>
+        <video src={videoSrc} autoPlay muted loop style={{
           position: 'absolute',
           top: 0,
           left: 0,

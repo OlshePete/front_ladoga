@@ -4,13 +4,16 @@ import React, { useEffect, useState } from 'react'
 import styles from './CookieNotification.module.scss'
 
 const CookieNotification = () => {
-    const [showNotification, setShowNotification] = useState(Boolean(document?.cookie?.includes('cookie_notification_accepted=true') || true));
+    const [showNotification, setShowNotification] = useState<boolean>(true);
   
     useEffect(() => {
+      if(document) {
+
         const cookieExists = document.cookie.includes('cookie_notification_accepted=true');
         if (cookieExists) {
           setShowNotification(false);
         }
+      }
       }, []);
 
     const handleAccept = () => {

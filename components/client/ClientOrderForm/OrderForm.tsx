@@ -90,7 +90,6 @@ const OrderForm: FC<Props> = ({ routes }) => {
                 {
                   currentRoute && Array.isArray(currentRoute.attributes.departures.data) && currentRoute.attributes.departures.data.map((depart) => {
                     // return <option >{JSON.stringify(depart)}</option>
-                    console.log('##@#@#@', currentRoute.attributes.departures.data)
                     return <option key={depart.attributes.time + "-" + depart.id} value={depart.id}>{depart.attributes.time.slice(0, 5)}</option>
                   })
                 }
@@ -244,7 +243,7 @@ const OrderForm: FC<Props> = ({ routes }) => {
       >
         {(props) => {
           const { values, setFieldValue, setFieldError, errors, submitForm } = props
-          console.log(errors, values)
+          // console.log(errors, values)
 
           // console.log("7777", currentRoute?.attributes.departures.data);
           const validateStep = (activeIndex: number): boolean => {

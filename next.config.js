@@ -1,7 +1,11 @@
-// import { withNextVideo } from "next-video/process";
-/** @type {import('next').NextConfig} */
+const path = require('path')
+    // import { withNextVideo } from "next-video/process";
+    /** @type {import('next').NextConfig} */
 const nextConfig = {
     output: "standalone",
+    sassOptions: {
+        includePaths: [path.join(__dirname, 'styles')],
+    },
     publicRuntimeConfig: {
         API_URL: process.env.API_URL,
         TEST_ENV: "testikula"

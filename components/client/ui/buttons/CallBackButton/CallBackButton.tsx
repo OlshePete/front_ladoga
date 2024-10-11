@@ -25,6 +25,8 @@ const CallBackButton: FC<IProps> = () => {
   };
 
   useEffect(() => {
+    if(document) {
+      
     if(open) {
       document.addEventListener('click', handleOutsideClick);
       document.addEventListener('touchstart', handleOutsideClick);
@@ -32,9 +34,12 @@ const CallBackButton: FC<IProps> = () => {
       document.removeEventListener('click', handleOutsideClick);
       document.removeEventListener('touchstart', handleOutsideClick);
     };
+  }
     return () => {
-      document.removeEventListener('click', handleOutsideClick);
-      document.removeEventListener('touchstart', handleOutsideClick);
+      if(document) {
+        document.removeEventListener('click', handleOutsideClick);
+        document.removeEventListener('touchstart', handleOutsideClick);
+      }
     };
   }, [open]);
     

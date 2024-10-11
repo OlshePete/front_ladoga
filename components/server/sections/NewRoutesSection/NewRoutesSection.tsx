@@ -9,8 +9,6 @@ const NewRoutesSection = async ({ routes }: { routes: Response<RouteSectionData[
   const API_URL = process.env.API_URL
 
   const contactContent = await wrappedGetContacts()
-  // routes.data.forEach(console.log)
-  // console.log("&&&&&&&&\n",JSON.stringify(routes,null,2))
   return (
     <section className={`${styles.container} section`} id={'top-routes'}>
       {

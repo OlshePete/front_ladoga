@@ -168,7 +168,6 @@ const OrderForm: FC<Props> = ({ routes }) => {
                 {
                   currentRoute && Array.isArray(currentRoute.attributes.departures.data) && currentRoute.attributes.departures.data.map((depart) => {
                     // return <option >{JSON.stringify(depart)}</option>
-                    console.log('##@#@#@', currentRoute.attributes.departures.data)
                     return <option key={depart.attributes.time + "-" + depart.id} value={depart.id}>{depart.attributes.time.slice(0, 5)}</option>
                   })
                 }

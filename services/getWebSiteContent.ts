@@ -95,7 +95,6 @@ const getFeedbacks = async () => {
       "Ошибка при загрузке наполнения для сайта. Раздел отзывы."
     );
     const intro_content:Response<FeedbacksInfoData> = await response.json()
-    console.log("__________________\n",JSON.stringify(Object.keys(intro_content.data)))
     return intro_content;
 };
   export const wrappedGetContent = wrapRequest(getContent) 

@@ -35,7 +35,6 @@ const ImageSlider: FC<IProps> = ({ images, tabIndex, children }) => {
         arrows:false,
         autoplay:true
     };
-    console.log(images, children)
     const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'https://ladoga-travel.ru/cms'
     return (<>
         <button tabIndex={tabIndex||undefined} className={styles.prev_icon} style={{}} onClick={() => slider?.current?.slickPrev()}>< RiArrowLeftWideLine /></button>

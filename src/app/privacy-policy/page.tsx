@@ -1,11 +1,13 @@
 import DOMPurify from "isomorphic-dompurify";
-import ClientWrapper from "../../../components/client/ClientWrapper";
 import { HeaderGlobal } from "../../../components/client/header/new/Header";
 import { wrappedGetIntro } from "../../../services/getWebSiteContent";
 import styles from "./page.module.scss";
+import Image from "next/image";
 
 
 export default async function Home() {
+  const API_URL = process.env.API_URL;
+
   const intro_content = await wrappedGetIntro()
   const links = [
     { name: 'описание', url: '/#about' },
@@ -64,9 +66,17 @@ export default async function Home() {
     }
   ]
   const regex = /^([^-|—|–]*)\s(-|—|–)\s/;
+  const logo = intro_content?.data.attributes.logo
   return (
       <>
-      {intro_content?.data.attributes.logo && <HeaderGlobal logo={intro_content.data.attributes.logo} scrollY={-1}>
+      {logo && <HeaderGlobal logo={intro_content.data.attributes.logo} scrollY={-1}>
+      <Image
+        src={API_URL + (logo.data.attributes.formats.small.url || "")}
+        alt={logo.data.attributes.alternativeText || ""}
+        className={styles.image}
+        width="120"
+        height="80"
+      />
       <ul className="flex flex-wrap justify-center items-center">
           {links.map((link, index) => (
             <li key={index}>

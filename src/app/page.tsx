@@ -3,9 +3,9 @@ import { OrderSection } from "../../components/server/sections/OrderSection/Orde
 import { StartSection } from "../../components/server/sections/StartSection/StartSection";
 import { TheFooter } from "../../components/server/TheFooter/TheFooter";
 import { wrappedGetRoutes } from "../../services/getRoutes";
-import { wrappedGetServices, wrappedGetContacts, wrappedGetContent, wrappedGetIntro } from "../../services/getWebSiteContent";
+import { wrappedGetServices, wrappedGetIntro } from "../../services/getWebSiteContent";
 import styles from "./page.module.scss";
-// import CookieNotification from "../../components/client/CookieNotification";
+import CookieNotification from "../../components/client/CookieNotification";
 import { AboutSection } from "../../components/server/sections/AboutSection/AboutSection";
 import { NewRoutesSection } from "../../components/server/sections/NewRoutesSection/NewRoutesSection";
 import HorizontalListSection from "../../components/server/sections/HorizontalListSection";
@@ -14,7 +14,7 @@ import CallBackButton from "../../components/client/ui/buttons/CallBackButton";
 import dynamic from "next/dynamic";
 
 // const OrderSection = dynamic(() => import('../../components/server/sections/OrderSection/OrderSection'))
-const CookieNotification = dynamic(() => import('../../components/client/CookieNotification'), { ssr: false })
+// const CookieNotification = dynamic(() => import('../../components/client/CookieNotification'), { ssr: false })
 
 export default async function Home() {
   const routes = await wrappedGetRoutes()
