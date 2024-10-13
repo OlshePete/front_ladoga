@@ -1,32 +1,40 @@
 .container {
-    width: calc(100dvw - 4rem);
+    width: calc(100vw - 4rem);
     display: flex;
-    gap:4rem;
+    gap: 4rem;
     /* overflow-x: hidden; */
     padding: 4rem 1rem;
     margin: 10vh 0;
-    color:white;
+    color: white;
 }
+
 .image {
     border-radius: 16px;
 }
+
 .imageContainer {
     min-width: 400px;
     height: 400px;
     position: relative;
 }
+
 .imageContainer.labled {
     width: 400px;
     height: 460px;
 }
+
 .image_caption {
     font-family: var(--font-header);
     text-transform: uppercase;
     position: absolute;
-    top:100%;
+    top: 100%;
 }
+
+
 /* Media queries for smaller breakpoints */
-@media (max-width: 1024px) { /* lg breakpoint */
+
+@media (max-width: 1024px) {
+    /* lg breakpoint */
     .imageContainer {
         min-width: 300px;
         height: 300px;
@@ -37,7 +45,8 @@
     }
 }
 
-@media (max-width: 768px) { /* md breakpoint */
+@media (max-width: 768px) {
+    /* md breakpoint */
     .imageContainer {
         min-width: 200px;
         height: 200px;
@@ -51,7 +60,8 @@
     }
 }
 
-@media (max-width: 480px) { /* sm breakpoint */
+@media (max-width: 480px) {
+    /* sm breakpoint */
     .imageContainer {
         min-width: 150px;
         height: 150px;

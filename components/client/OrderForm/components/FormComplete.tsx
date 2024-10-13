@@ -6,7 +6,7 @@ import { IOrderResponse } from '../../../../services/getOrders'
 const FormComplete:FC<{formComplete:IOrderResponse, setFormComplete:()=>void}> = ({formComplete, setFormComplete}) => {
   const order = formComplete
     return (
-    <div className='h-[80dvh] flex flex-col items-center justify-center gap-10 py-10'>
+    <div className='h-[80vh] flex flex-col items-center justify-center gap-10 py-10'>
         <h3 className='text-center'> Ваш заказ №{order.data.id} успешно оформлен!</h3>
         <span>В ближайшее время с Вами свяжется наш менеджер и уточнит детали. </span>
         <div>

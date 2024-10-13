@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
     gap: 2rem;
-    max-width: 100dvw;
+    max-width: 100vw;
     overflow-x: hidden;
     min-height: 100vh;
     height: fit-content;
@@ -20,7 +20,7 @@
 .content {
     display: flex;
     flex-direction: row;
-    width: 100dvw;
+    width: 100vw;
     min-height: 600px;
     height: fit-content;
 }

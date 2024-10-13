@@ -13,14 +13,14 @@
     align-items: center;
     justify-content: flex-end;
     // outline: 1px solid green;
-    min-height: min(800px, 100dvh);
-    max-height: min(800px, 100dvh);
+    min-height: min(800px, 100vh);
+    max-height: min(800px, 100vh);
     min-width: 50%;
     max-width: 50%;
     position: relative;
     color: white;
     &:last-child {
-        min-width: 100dvw;
+        min-width: 100vw;
     }
     & h2,
     & h3,

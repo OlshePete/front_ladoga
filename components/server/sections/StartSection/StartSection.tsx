@@ -22,7 +22,7 @@ const StartSection = ({ content }: { content: Response<StartSectionData> }) => {
     </g>
   </svg>)
 const API_URL = process.env.API_URL
-const videoSrc = `/intro_video_cutted.mp4`;
+const videoSrc = `/intro_video.mp4`;
   return (
     <>
       <section className={`${styles.container} section`} id='intro'>
@@ -50,7 +50,7 @@ const videoSrc = `/intro_video_cutted.mp4`;
           playsInline
         />
       </Suspense>
-        <div className="absolute bg-[rgba(0,0,0,0.5)] z-[1] h-[100dvh] w-[100dvw]"></div>
+        <div className="absolute bg-[rgba(0,0,0,0.5)] z-[1] h-[100vh] w-[100vw]"></div>
 
         <div className={styles.title_container}>
           <ScrollWrapperStartSection>

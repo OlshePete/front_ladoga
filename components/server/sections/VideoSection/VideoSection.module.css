@@ -1,6 +1,6 @@
 .video {
-    min-width: min(60dvw, 1200px);
-    height: 60dvh;
+    min-width: min(60vw, 1200px);
+    height: 60vh;
     outline: 1px solid;
 }
 
